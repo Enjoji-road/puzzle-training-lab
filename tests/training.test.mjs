@@ -117,4 +117,45 @@ test('local storage retains independent attempts from two tabs and reports quota
   assert(saveLocal(first));assert(saveLocal(second));assert.equal(Object.keys(parseBackup(cache.get(STORAGE_KEY),puzzles).attempts).length,2);
   globalThis.localStorage.setItem=()=>{throw Error('quota');};assert.equal(saveLocal(second),false);delete globalThis.localStorage;
 });
+test('loading the expanded catalog preserves a legacy v1 backup and its pending hypothesis',()=>{
+  const old=['routes.json','logic.json','symbols.json'].flatMap(data);
+  const before=M.newAttempt(p('route-2'));
+  M.mark(before,'r2c2','W');
+  M.checkpoint(before,'仮定の前');
+  M.beginBranch(before,'右の案');
+  M.mark(before,'r2c3','W');
+  M.useHint(before,1);
+  M.useHint(before,2);
+  const serialized=JSON.stringify(stateWith(before));
+  const original=parseBackup(serialized,old);
+  const expanded=parseBackup(serialized,puzzles);
+  assert.deepEqual(expanded,original);
+  const resumed=expanded.attempts[before.id];
+  assert(M.discardBranch(resumed));
+  assert.deepEqual(resumed.frame.board.marks,{r2c2:'W'});
+  assert.deepEqual(resumed.stats.hints,[1,2]);
+  assert(M.travel(resumed));
+  assert.equal(resumed.frame.branch.name,'右の案');
+  assert(M.travel(resumed,true));
+  assert.equal(resumed.frame.branch,undefined);
+});
+test('the 30 additions are reachable by genre, level, and review skill',()=>{
+  const baseIds=new Set(['routes.json','logic.json','symbols.json'].flatMap(data).map(q=>q.id));
+  const added=puzzles.filter(q=>!baseIds.has(q.id));
+  const state=stateWith();
+  for(const genre of Object.keys(M.GENRES)){
+    for(const lv of [4,5]){
+      const group=added.filter(q=>q.genre===genre&&q.level===lv);
+      assert(group.length>=5);
+      const html=catalog(state,puzzles,genre,lv);
+      assert(group.every(q=>html.includes('data-pid="'+q.id+'"')));
+    }
+  }
+  for(const [tag,genre] of [['複数条件の統合','logic'],['全体構造の把握','route'],['候補管理','symbol']]){
+    const html=review(state,puzzles,tag,5,genre);
+    const visible=puzzles.filter(q=>html.includes('data-pid="'+q.id+'"'));
+    assert(visible.some(q=>!baseIds.has(q.id)));
+    assert(visible.every(q=>q.genre===genre&&q.level===5&&q.skills.includes(tag)));
+  }
+});
 

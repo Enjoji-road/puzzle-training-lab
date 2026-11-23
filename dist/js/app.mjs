@@ -6,7 +6,7 @@ import {esc as E,paintArt} from './visual.mjs';
 const main=document.getElementById('main'),dialog=document.getElementById('dialog');
 const qs=s=>document.querySelector(s);
 const media=matchMedia('(prefers-color-scheme: dark)');
-let puzzles=[],state,where,arg,level=0,view={},attempt,puzzle,saveError='',timer,dialogDone;
+let puzzles=[],state,where,arg,level=0,reviewLevel=0,reviewGenre='',view={},attempt,puzzle,saveError='',timer,dialogDone;
 function go(path){location.hash='/'+path;}
 function save(replace=false){
   if(!saveLocal(state,replace))saveError='ブラウザに保存できませんでした。学習記録からJSONを書き出すと、このタブの記録を保管できます。';
@@ -63,7 +63,7 @@ function render(retain=true){
   switch(where){
     case 'catalog':case 'genre':html=catalog(state,puzzles,where==='genre'?arg:'',level);break;
     case 'play':html=player(puzzle,attempt,view);break;
-    case 'review':html=review(state,puzzles,arg!==''?M.SKILLS[Number(arg)]:'');break;
+    case 'review':html=review(state,puzzles,arg!==''?M.SKILLS[Number(arg)]:'',reviewLevel,reviewGenre);break;
     case 'records':html=records(state,puzzles);break;
     case 'analysis':html=analysis(state,puzzles);break;
     default:html=home(state,puzzles);
@@ -156,7 +156,17 @@ main.addEventListener('submit',e=>{
     save();render();toast(message||'根拠をつなぎました。');
   }
 });
-main.addEventListener('change',e=>{if(e.target.id==='level-filter'){level=Number(e.target.value);render();qs('#level-filter')?.focus();}});
+main.addEventListener('change',e=>{
+  const {id,value}=e.target;
+  if(id==='level-filter'){
+    if(where==='review')reviewLevel=Number(value);
+    else level=Number(value);
+  }
+  else if(id==='review-genre')reviewGenre=value;
+  else return;
+  render();
+  document.getElementById(id)?.focus();
+});
 qs('#backup-file').addEventListener('change',async e=>{
   const file=e.target.files[0];e.target.value='';if(!file)return;
   try{

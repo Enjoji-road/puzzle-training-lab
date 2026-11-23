@@ -1,1 +1,11 @@
-{"version":1,"files":["routes.json","logic.json","symbols.json"]}
+{
+  "version": 1,
+  "files": [
+    "routes.json",
+    "logic.json",
+    "symbols.json",
+    "advanced-logic.json",
+    "advanced-symbols.json",
+    "advanced-routes.json"
+  ]
+}
