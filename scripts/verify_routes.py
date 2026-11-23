@@ -70,7 +70,7 @@ def satisfies(route, condition, neighbors):
     raise ValueError(f"Unknown route constraint: {kind}")
 
 
-def verify(puzzle):
+def verify(puzzle, candidates=None):
     board = puzzle["board"]
     n = board["size"]
     cells = board["cells"]
@@ -94,7 +94,8 @@ def verify(puzzle):
             assert labels[co["at"]]["given"] == "W"
         assert all(k in labels for k in co.get("cells",[]))
     neighbors = adjacency(board)
-    candidates = enumerate_routes(puzzle)
+    if candidates is None:
+        candidates = enumerate_routes(puzzle)
     co_by_id = {c["id"]:c for c in board["constraints"]}
     clue_ids = {c["id"] for c in puzzle["clues"]}
     assert len(co_by_id) == len(board["constraints"])
@@ -103,16 +104,35 @@ def verify(puzzle):
     assert len(valid) == 1, (puzzle["id"],"solution count",len(valid))
     expected = {v:("W" if v in valid[0] else "B") for v in editable}
     assert puzzle["solution"] == expected
+    cases_checked = 0
+
+    def matching(refs, facts):
+        chosen = [co_by_id[i] for i in refs if i in co_by_id]
+        return [path for path in candidates if all(satisfies(path,c,neighbors) for c in chosen) and
+                all((key in path) == (val == "W") for key,val in facts.items())]
+
     def check_facts(item, premise):
+        nonlocal cases_checked
         assert set(item["clues"]) <= clue_ids
         asserted = item.get("facts",{})
         assert set(asserted) <= editable
-        chosen = [co_by_id[i] for i in item["clues"] if i in co_by_id]
-        models = [path for path in candidates if all(satisfies(path,c,neighbors) for c in chosen) and
-                  all((key in path) == (val == "W") for key,val in premise.items())]
+        models = matching(item["clues"], premise)
         assert models, (puzzle["id"],"inconsistent premises",item)
         for key,val in asserted.items():
             assert val in ("B","W") and all((key in p) == (val == "W") for p in models), (puzzle["id"], "unsupported assertion",key,item.get("title",item.get("text")))
+        for case in item.get("cases", []):
+            assume, before, rejected_by = case["assume"], case["before"], case["by"]
+            assert assume and set(assume) <= editable and not set(assume) & premise.keys()
+            assert set(assume.values()) <= {"B", "W"}
+            assert rejected_by not in before and set([*before, rejected_by]) <= set(item["clues"])
+            branch = premise | assume
+            possible = matching(before, branch)
+            assert possible, (puzzle["id"], "branch impossible before contradiction", case)
+            for key, value in case.get("holds", {}).items():
+                assert key in editable and value in ("B", "W")
+                assert all((key in p) == (value == "W") for p in possible), (puzzle["id"], "unsupported branch assertion", case)
+            assert not matching([*before, rejected_by], branch), (puzzle["id"], "branch survives contradiction", case)
+            cases_checked += 1
     assert len(puzzle["hints"]) == 3 and puzzle["hints"][2].get("facts")
     assert len(puzzle["hints"][2]["facts"]) < len(editable)
     for hint in puzzle["hints"]:
@@ -123,7 +143,7 @@ def verify(puzzle):
         check_facts(step,context)
         context.update(step["facts"])
     assert context == expected, (puzzle["id"],"walkthrough does not reconstruct board",editable-set(context))
-    return {"id":puzzle["id"],"size":n,"editable":len(editable),"base_paths":len(candidates),"solutions":len(valid),"walkthrough_steps":len(puzzle["steps"]),"step_assignments":len(context)}
+    return {"id":puzzle["id"],"size":n,"editable":len(editable),"base_paths":len(candidates),"solutions":len(valid),"walkthrough_steps":len(puzzle["steps"]),"step_assignments":len(context),"branches":cases_checked}
 
 
 def main():

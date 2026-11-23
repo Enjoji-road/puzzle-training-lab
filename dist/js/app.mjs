@@ -1,12 +1,12 @@
 import * as M from './model.mjs';
 import {readLocal,saveLocal,parseBackup,STORAGE_KEY} from './storage.mjs';
 import {home,catalog,review,analysis,records,navigation} from './pages.mjs';
-import {clueList,player,reasonTarget} from './player.mjs';
+import {player,reasonTarget} from './player.mjs';
 import {esc as E,paintArt} from './visual.mjs';
 const main=document.getElementById('main'),dialog=document.getElementById('dialog');
 const qs=s=>document.querySelector(s);
 const media=matchMedia('(prefers-color-scheme: dark)');
-let puzzles=[],state,where,arg,level=0,view={},attempt,puzzle,saveError='',timer,dialogDone;
+let puzzles=[],state,where,arg,level=0,reviewLevel=0,reviewGenre='',view={},attempt,puzzle,saveError='',timer,dialogDone;
 function go(path){location.hash='/'+path;}
 function save(replace=false){
   if(!saveLocal(state,replace))saveError='ブラウザに保存できませんでした。学習記録からJSONを書き出すと、このタブの記録を保管できます。';
@@ -19,13 +19,6 @@ function modal(title,body,confirm,callback,input=''){
   dialog.innerHTML=`<form method="dialog" class="dialog-form"><h2 id="dialog-title">${E(title)}</h2><p>${E(body)}</p>${input?`<label>名前<input name="entry" type="text" maxlength="60" value="${E(input)}"></label>`:''}<div class="actions"><button value="cancel" class="btn">閉じる</button><button value="ok" class="btn primary">${E(confirm)}</button></div></form>`;
   dialog.setAttribute('aria-labelledby','dialog-title');
   dialog.returnValue='';dialog.showModal();const el=dialog.querySelector('input');if(el){el.focus();el.select();}
-}
-function openClues(p,board){
-  dialogDone=null;
-  dialog.returnValue='';
-  dialog.innerHTML=`<div class="clue-dialog"><h2 id="clue-title">手がかり</h2><p class="muted">条件を選ぶと、盤面の上に表示されます。</p>${clueList(p,board,'pick-clue')}<form method="dialog"><button class="btn">閉じる</button></form></div>`;
-  dialog.setAttribute('aria-labelledby','clue-title');
-  dialog.showModal();
 }
 dialog.addEventListener('close',()=>{const cb=dialogDone;dialogDone=null;if(dialog.returnValue==='ok'&&cb)cb(dialog.querySelector('input')?.value||'');});
 function theme(){
@@ -63,7 +56,7 @@ function render(retain=true){
   switch(where){
     case 'catalog':case 'genre':html=catalog(state,puzzles,where==='genre'?arg:'',level);break;
     case 'play':html=player(puzzle,attempt,view);break;
-    case 'review':html=review(state,puzzles,arg!==''?M.SKILLS[Number(arg)]:'');break;
+    case 'review':html=review(state,puzzles,arg!==''?M.SKILLS[Number(arg)]:'',reviewLevel,reviewGenre);break;
     case 'records':html=records(state,puzzles);break;
     case 'analysis':html=analysis(state,puzzles);break;
     default:html=home(state,puzzles);
@@ -111,13 +104,14 @@ function onAction(e){
     case 'fit':view.fit=!view.fit;render();return;
     case 'zoom-in':case 'zoom-out':view.zoom=Math.max(.75,Math.min(1.75,view.zoom+(action==='zoom-in'?.25:-.25)));render();return;
     case 'undo':case 'redo':update(()=>M.travel(a,action==='redo'),'',true);return;
-    case 'focus':case 'pick-clue':
-      if(dialog.open)dialog.close();
+    case 'focus':
       if(a.solved)update(()=>{b.focus=b.focus===id?'':id;M.changed(a);});
       else update(()=>M.edit(a,f=>{f.board.focus=b.focus===id?'':id;}));
-      if(action==='pick-clue')qs('[data-action="to-clues"]')?.focus({preventScroll:true});
       return;
-    case 'to-clues':openClues(p,b);return;
+    case 'to-clues':
+      qs('#clue-panel')?.focus({preventScroll:true});
+      qs('#clue-panel')?.scrollIntoView({block:'start'});
+      return;
     case 'begin':modal('仮定に名前を付ける','ここから置くマス・候補・メモに仮定を適用します。途中の結論もまとめて戻せます。','仮定を始める',name=>update(()=>M.beginBranch(a,name),'仮定を始めました。'),'仮定 '+(a.stats.branches+1));return;
     case 'discard':update(()=>M.discardBranch(a),'仮定を置く前に戻しました。',true);return;
     case 'point':modal('チェックポイントを保存','今の盤面と、調べている仮定を一緒に保存します。','保存する',name=>update(()=>M.checkpoint(a,name),'チェックポイントを保存しました。'),'記録点 '+(a.points.length+1));return;
@@ -156,7 +150,17 @@ main.addEventListener('submit',e=>{
     save();render();toast(message||'根拠をつなぎました。');
   }
 });
-main.addEventListener('change',e=>{if(e.target.id==='level-filter'){level=Number(e.target.value);render();qs('#level-filter')?.focus();}});
+main.addEventListener('change',e=>{
+  const {id,value}=e.target;
+  if(id==='level-filter'){
+    if(where==='review')reviewLevel=Number(value);
+    else level=Number(value);
+  }
+  else if(id==='review-genre')reviewGenre=value;
+  else return;
+  render();
+  document.getElementById(id)?.focus();
+});
 qs('#backup-file').addEventListener('change',async e=>{
   const file=e.target.files[0];e.target.value='';if(!file)return;
   try{

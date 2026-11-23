@@ -43,19 +43,26 @@ function row(s,p,review=false){
   const tries=attemptsFor(s,p.id),clear=tries.some(a=>a.solved),seen=tries.length;
   return `<div class="problem-row"><div class="lv-box ${p.genre}"><small>Lv.</small>${p.level}</div><div class="problem-details"><div class="line-meta">${GENRES[p.genre].short} · ${p.pool==='review'?'復習問題':GOALS[p.level-1]}</div><h3>${E(p.title)}</h3><p>${E(p.goal)}</p></div><div class="row-end">${clear?pill('success',I('check',14)+' クリア'):seen?pill('neutral','挑戦中'):''}${act(review?'review-start':'start',review?'復習する':clear?'もう一度':seen?'続きへ':'解く',`data-pid="${p.id}"`,'btn small')}</div></div>`;
 }
+function levelPicker(filter){
+  return `<label class="level-filter">レベル <select id="level-filter">${[0,1,2,3,4,5].map(n=>`<option value="${n}" ${n===filter?'selected':''}>${n?'Lv.'+n:'すべて'}</option>`).join('')}</select></label>`;
+}
 export function catalog(s,ps,genre,filter){
   const g=GENRES[genre],base=primary(ps).filter(p=>!g||p.genre===genre);
   const heading=g?g.name:'問題一覧';
   return `${g?link('catalog','問題一覧','crumb'):''}${head(heading,g?g.desc:'ジャンルとレベルを選んで、練習する問題を開きましょう。')}
   <div class="genre-filters">${link('catalog','すべて',!g?'filter on':'filter')}${Object.entries(GENRES).map(([k,v])=>link('genre/'+k,I(v.icon,16)+v.short,genre===k?'filter on':'filter')).join('')}</div>
-  <div class="section-title compact"><h2>難易度を選ぶ</h2><label class="level-filter">レベル <select id="level-filter">${[0,1,2,3,4,5].map(n=>`<option value="${n}" ${n===filter?'selected':''}>${n?'Lv.'+n:'すべて'}</option>`).join('')}</select></label></div>
+  <div class="section-title compact"><h2>難易度を選ぶ</h2>${levelPicker(filter)}</div>
   <div class="panel row-list">${base.filter(p=>!filter||p.level===filter).sort((a,b)=>a.level-b.level).map(p=>row(s,p)).join('')}</div>`;
 }
-export function review(s,ps,tagName){
-  const selected=SKILLS.includes(tagName)?tagName:'',list=reviewList(s,ps,selected);
+export function review(s,ps,tagName,level=0,genre=''){
+  const selected=SKILLS.includes(tagName)?tagName:'';
+  const list=reviewList(s,ps,selected).filter(p=>(!level||p.level===level)&&(!genre||p.genre===genre));
+  const genrePicker=`<label class="level-filter">ジャンル <select id="review-genre"><option value="">すべて</option>${Object.entries(GENRES).map(([k,g])=>`<option value="${k}" ${k===genre?'selected':''}>${g.short}</option>`).join('')}</select></label>`;
   return `${head('重点復習','練習したい考え方を選ぶと、同じスキルを使う問題を別のジャンルからも探せます。')}
   <section class="panel padded"><h2>練習するスキル</h2><div class="choose-skills">${link('review','すべて',!selected?'filter on':'filter')}${SKILLS.map((t,i)=>link('review/'+i,E(t),selected===t?'filter on':'filter')).join('')}</div></section>
-  ${section(selected?E(selected)+' の演習':'復習できる問題',`<span class="quiet">${list.length}問</span>`)}<div class="panel row-list">${list.map(p=>row(s,p,true)).join('')}</div>`;
+  ${section(selected?E(selected)+' の演習':'復習できる問題',`<span class="quiet">${list.length}問</span>`)}
+  <div class="review-filters">${genrePicker}${levelPicker(level)}</div>
+  <div class="panel row-list">${list.length?list.map(p=>row(s,p,true)).join(''):'<p class="empty">このスキル・ジャンル・レベルの組み合わせに該当する問題はありません。</p>'}</div>`;
 }
 function tabs(current){return `<div class="tabs">${link('records','学習記録',current==='records'?'current':'')}${link('analysis','苦手分析',current==='analysis'?'current':'')}</div>`;}
 export function analysis(s,ps){

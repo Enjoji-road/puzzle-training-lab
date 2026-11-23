@@ -631,6 +631,13 @@ main {
   border-color: var(--green);
 }
 
+.review-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 12px;
+}
+
 .level-filter {
   display: flex;
   gap: 6px;
@@ -832,9 +839,24 @@ select {
 
 .play-grid {
   display: grid;
+  grid-template-areas: "board clues" "board help";
+  grid-template-rows: auto 1fr;
   grid-template-columns: minmax(0,1.55fr) minmax(270px,.88fr);
   align-items: start;
   gap: 19px;
+}
+
+#clue-panel {
+  grid-area: clues;
+  scroll-margin-top: 12px;
+}
+
+.play-primary {
+  grid-area: board;
+}
+
+.play-aside {
+  grid-area: help;
 }
 
 .play-primary,.play-aside {
@@ -933,18 +955,7 @@ select {
   border-radius: 1px;
   z-index: 3;
 }
-.clue-dialog {
-  width: min(440px, 75vw);
-}
-.clue-dialog .clues {
-  max-height: min(53vh, 430px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-.clue-dialog form {
-  margin-top: 12px;
-  text-align: right;
-}
+
 
 .route-board {
   display: grid;
@@ -1537,8 +1548,9 @@ dialog::backdrop {
 }
 
 @media(max-width:700px) {
-  #clue-panel {
-    display: none;
+  .play-grid {
+    grid-template-areas: "clues" "board" "help";
+    grid-template-rows: auto;
   }
   .zoom .fit-btn {
     min-height: 37px;

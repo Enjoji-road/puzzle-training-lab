@@ -1,0 +1,8329 @@
+[
+  {
+    "id": "route-4-02",
+    "genre": "route",
+    "level": 4,
+    "title": "三本桟橋の荷札",
+    "goal": "三択と直進を組み合わせる",
+    "intro": "桟橋は上・中央・下の三本。荷札に書かれた白の数から使える桟橋を絞り、対岸の渡り方を決めましょう。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "「直」は縦または横に直進し、「曲」は直角に曲がる固定の白です。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "B5とF5の間には上・中央・下の3本の桟橋がある。白は一本の道にする。"
+      },
+      {
+        "id": "c2",
+        "text": "P（D2）・Q（D8）・X（I5）のうち、ちょうど2マスが白。"
+      },
+      {
+        "id": "c3",
+        "text": "I6では直進する。"
+      },
+      {
+        "id": "c4",
+        "text": "Q（D8）が白なら、Y（J6）も白。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "SからB5に着いたあと、三本の桟橋を何本通れるか考えましょう。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "Xを黒にすると、白2マスをPとQで作ることになります。どちらの桟橋にも入れるでしょうか。",
+        "clues": [
+          "c1",
+          "c2"
+        ]
+      },
+      {
+        "text": "X（I5）は白です。黒だとPとQが両方白になります。B5から上下の両方に入ると、S側を含めた三方向の枝分かれになります。",
+        "clues": [
+          "c1",
+          "c2"
+        ],
+        "facts": {
+          "r5c9": "W"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "桟橋を二本使えるか",
+        "text": "SからB5へ入る道に出口は一つだけ。上と下の桟橋P・Qを両方使うことはできません。もしXが黒なら「白2」はPとQを要求します。よってXは白、P・Qの一方は白です。",
+        "clues": [
+          "c1",
+          "c2"
+        ],
+        "facts": {
+          "r5c9": "W"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r5c9": "B"
+            },
+            "before": [
+              "c1"
+            ],
+            "by": "c2"
+          }
+        ]
+      },
+      {
+        "title": "直進の出口を見る",
+        "text": "I5はI6の北。I6の南のI7は白、東のY（J6）は黒です。H5からI6にはI5経由で入るので、H6は黒です。",
+        "clues": [
+          "c1",
+          "c3"
+        ],
+        "facts": {
+          "r7c9": "W",
+          "r6c10": "B",
+          "r6c8": "B"
+        }
+      },
+      {
+        "title": "条件の向きを使う",
+        "text": "もしQが白ならYも白のはずですが、Yは黒です。Qは黒、白2マスの残りPは白。これで上の桟橋だけを通ります。",
+        "clues": [
+          "c1",
+          "c2",
+          "c4"
+        ],
+        "facts": {
+          "r2c4": "W",
+          "r8c4": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r8c4": "W"
+            },
+            "before": [
+              "c1"
+            ],
+            "by": "c4"
+          }
+        ]
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "上の桟橋からF5で岸へ戻り、I6を縦に通って最後の曲がり角へ向かいます。 曲がるマスだけを挙げると、Sから順に A5 → B5 → B2 → F2 → F5 → I5 → I7 → J7 → J9。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c2": "W",
+          "r2c3": "W",
+          "r2c5": "W",
+          "r2c6": "W",
+          "r3c2": "W",
+          "r3c6": "W",
+          "r4c2": "W",
+          "r4c6": "W",
+          "r5c2": "W",
+          "r5c3": "B",
+          "r5c4": "B",
+          "r5c5": "B",
+          "r5c6": "W",
+          "r5c7": "W",
+          "r5c8": "W",
+          "r6c2": "B",
+          "r6c6": "B",
+          "r7c2": "B",
+          "r7c6": "B",
+          "r7c10": "W",
+          "r8c2": "B",
+          "r8c3": "B",
+          "r8c5": "B",
+          "r8c6": "B",
+          "r8c10": "W"
+        }
+      }
+    ],
+    "pitfall": "直進で使えない出口が判明したら、その出口を要求していた離れた信号も見直しましょう。",
+    "transfer": "複数のマスが同じ分岐の別々の枝にあると、同時に選べる数に上限ができます。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "三択の排他性",
+        "条件文の対偶"
+      ],
+      "notes": "作問レビューでは、三択の排他性と条件文の対偶を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 10,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c2",
+          "label": "B2"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2",
+          "badge": "P"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c10",
+          "label": "J2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c4",
+          "label": "D3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c5",
+          "label": "E3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c6",
+          "label": "F3"
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c10",
+          "label": "J3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c5",
+          "label": "E4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c6",
+          "label": "F4"
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c8",
+          "label": "H4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c10",
+          "label": "J4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "badge": "X"
+        },
+        {
+          "key": "r5c10",
+          "label": "J5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6"
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c6",
+          "label": "F6"
+        },
+        {
+          "key": "r6c7",
+          "label": "G6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c8",
+          "label": "H6"
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "W",
+          "badge": "直"
+        },
+        {
+          "key": "r6c10",
+          "label": "J6",
+          "badge": "Y"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7"
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c6",
+          "label": "F7"
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c8",
+          "label": "H7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c9",
+          "label": "I7"
+        },
+        {
+          "key": "r7c10",
+          "label": "J7"
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8"
+        },
+        {
+          "key": "r8c3",
+          "label": "C8"
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "badge": "Q"
+        },
+        {
+          "key": "r8c5",
+          "label": "E8"
+        },
+        {
+          "key": "r8c6",
+          "label": "F8"
+        },
+        {
+          "key": "r8c7",
+          "label": "G8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c9",
+          "label": "I8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c10",
+          "label": "J8"
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c8",
+          "label": "H9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c10",
+          "label": "J9",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r5c1",
+      "finish": "r9c10",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "quota",
+          "cells": [
+            "r2c4",
+            "r8c4",
+            "r5c9"
+          ],
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "straight",
+          "at": "r6c9"
+        },
+        {
+          "id": "c4",
+          "type": "implies",
+          "cells": [
+            "r8c4",
+            "r6c10"
+          ],
+          "values": [
+            "W",
+            "W"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r2c2": "W",
+      "r2c3": "W",
+      "r2c4": "W",
+      "r2c5": "W",
+      "r2c6": "W",
+      "r3c2": "W",
+      "r3c6": "W",
+      "r4c2": "W",
+      "r4c6": "W",
+      "r5c2": "W",
+      "r5c3": "B",
+      "r5c4": "B",
+      "r5c5": "B",
+      "r5c6": "W",
+      "r5c7": "W",
+      "r5c8": "W",
+      "r5c9": "W",
+      "r6c2": "B",
+      "r6c6": "B",
+      "r6c8": "B",
+      "r6c10": "B",
+      "r7c2": "B",
+      "r7c6": "B",
+      "r7c9": "W",
+      "r7c10": "W",
+      "r8c2": "B",
+      "r8c3": "B",
+      "r8c4": "B",
+      "r8c5": "B",
+      "r8c6": "B",
+      "r8c10": "W"
+    }
+  },
+  {
+    "id": "route-4-03",
+    "genre": "route",
+    "level": 4,
+    "title": "貯水槽を渡る時計橋",
+    "goal": "必須の橋から通過順を復元する",
+    "intro": "四角い堤の真ん中にある時計橋は必ず渡ります。入口が決まったとき、反対岸の出口がどこに来るかを追いましょう。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "E4の「橋」は必ず通る白マス。西のSから東のGまで、すべての白をつなぐ。"
+      },
+      {
+        "id": "c2",
+        "text": "L4の数字は1。隣の白はちょうど1マス。"
+      },
+      {
+        "id": "c3",
+        "text": "P（B2）とX（K4）は同じ色。"
+      },
+      {
+        "id": "c4",
+        "text": "Q（H6）が白なら、Y（L5）も白。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "中央の橋E4を通るには、E2とE6の両端まで縦につながります。外周のどの半分から入るか考えましょう。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "Pから橋へ入ると出口はQ側です。そのときXとYはどうなり、L4の数字にいくつ白が集まるでしょう。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ]
+      },
+      {
+        "text": "P（B2）は黒です。Pが白なら北から橋に入って南のQを通って出ます。すると同色のXも、Qが要求するYも白となり、L4の1を超えます。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "facts": {
+          "r2c2": "B"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "橋の両端を確保する",
+        "text": "固定の白E4から出入りできるのはE3・E5だけ。どちらも白にして真っすぐ延ばすとE2・E6にも到達します。S側とG側はこの橋を使って結ぶ必要があります。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c5": "W",
+          "r3c5": "W",
+          "r5c5": "W",
+          "r6c5": "W"
+        }
+      },
+      {
+        "title": "北から入る仮定を順に追う",
+        "text": "Pが白ならSは左上からE2へ進み、橋を南へ渡ります。E6から左へ戻るとS側のB4にぶつかるので、右下のQから出るしかありません。XはPと同色、Qが白ならYも白です。X・YがL4に接して数字1を超えるので、Pは黒です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "facts": {
+          "r2c2": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r2c2": "W"
+            },
+            "before": [
+              "c1",
+              "c3",
+              "c4"
+            ],
+            "by": "c2"
+          }
+        ]
+      },
+      {
+        "title": "残った向きで渡る",
+        "text": "Pが黒なので左下からE6に入り、橋を北へ渡って右上へ出ます。Qは黒。Pと同色のXも黒です。L4で1を作れるのはYだけなので白にします。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r5c12": "W",
+          "r6c8": "B",
+          "r4c11": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "橋を渡り切る前に外周だけで東へ抜けると、中央の固定の白が孤立します。 曲がるマスだけを挙げると、Sから順に A4 → B4 → B6 → E6 → E2 → H2 → H4 → J4 → J5 → L5 → L6。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c3": "B",
+          "r2c4": "B",
+          "r2c6": "W",
+          "r2c7": "W",
+          "r2c8": "W",
+          "r3c2": "B",
+          "r3c8": "W",
+          "r4c2": "W",
+          "r4c8": "W",
+          "r4c9": "W",
+          "r4c10": "W",
+          "r5c2": "W",
+          "r5c8": "B",
+          "r5c10": "W",
+          "r5c11": "W",
+          "r6c2": "W",
+          "r6c3": "W",
+          "r6c4": "W",
+          "r6c6": "B",
+          "r6c7": "B",
+          "r6c11": "B"
+        }
+      }
+    ],
+    "pitfall": "外周だけでSとGがつながっても、中央に残した白は未接続です。",
+    "transfer": "必須の通過点から両方向へ延ばし、どちらの順で通れば入口と出口を結べるか比べます。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "必須橋の向き",
+        "二つの経路から生じる数字超過"
+      ],
+      "notes": "作問レビューでは、必須橋の向きと二つの経路から生じる数字超過を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 12,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c11",
+          "label": "K1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c12",
+          "label": "L1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c2",
+          "label": "B2",
+          "badge": "P"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2"
+        },
+        {
+          "key": "r2c8",
+          "label": "H2"
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c10",
+          "label": "J2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c11",
+          "label": "K2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c12",
+          "label": "L2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c4",
+          "label": "D3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c5",
+          "label": "E3"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3"
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c10",
+          "label": "J3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c11",
+          "label": "K3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c12",
+          "label": "L3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r4c2",
+          "label": "B4"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c5",
+          "label": "E4",
+          "given": "W",
+          "badge": "橋"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c8",
+          "label": "H4"
+        },
+        {
+          "key": "r4c9",
+          "label": "I4"
+        },
+        {
+          "key": "r4c10",
+          "label": "J4"
+        },
+        {
+          "key": "r4c11",
+          "label": "K4",
+          "badge": "X"
+        },
+        {
+          "key": "r4c12",
+          "label": "L4",
+          "given": "B",
+          "wall": true,
+          "badge": "1"
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c4",
+          "label": "D5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c5",
+          "label": "E5"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c7",
+          "label": "G5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c10",
+          "label": "J5"
+        },
+        {
+          "key": "r5c11",
+          "label": "K5"
+        },
+        {
+          "key": "r5c12",
+          "label": "L5",
+          "badge": "Y"
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6"
+        },
+        {
+          "key": "r6c3",
+          "label": "C6"
+        },
+        {
+          "key": "r6c4",
+          "label": "D6"
+        },
+        {
+          "key": "r6c5",
+          "label": "E6"
+        },
+        {
+          "key": "r6c6",
+          "label": "F6"
+        },
+        {
+          "key": "r6c7",
+          "label": "G6"
+        },
+        {
+          "key": "r6c8",
+          "label": "H6",
+          "badge": "Q"
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c10",
+          "label": "J6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c11",
+          "label": "K6"
+        },
+        {
+          "key": "r6c12",
+          "label": "L6",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c6",
+          "label": "F7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c8",
+          "label": "H7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c9",
+          "label": "I7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c10",
+          "label": "J7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c11",
+          "label": "K7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c12",
+          "label": "L7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c3",
+          "label": "C8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c5",
+          "label": "E8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c6",
+          "label": "F8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c7",
+          "label": "G8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c9",
+          "label": "I8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c10",
+          "label": "J8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c11",
+          "label": "K8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c12",
+          "label": "L8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c8",
+          "label": "H9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c10",
+          "label": "J9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c11",
+          "label": "K9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c12",
+          "label": "L9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c11",
+          "label": "K10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c12",
+          "label": "L10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c1",
+          "label": "A11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c2",
+          "label": "B11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c3",
+          "label": "C11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c4",
+          "label": "D11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c5",
+          "label": "E11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c6",
+          "label": "F11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c7",
+          "label": "G11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c8",
+          "label": "H11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c9",
+          "label": "I11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c10",
+          "label": "J11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c11",
+          "label": "K11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c12",
+          "label": "L11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c1",
+          "label": "A12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c2",
+          "label": "B12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c3",
+          "label": "C12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c4",
+          "label": "D12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c5",
+          "label": "E12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c6",
+          "label": "F12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c7",
+          "label": "G12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c8",
+          "label": "H12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c9",
+          "label": "I12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c10",
+          "label": "J12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c11",
+          "label": "K12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c12",
+          "label": "L12",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r4c1",
+      "finish": "r6c12",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r4c12",
+          "number": 1
+        },
+        {
+          "id": "c3",
+          "type": "same",
+          "cells": [
+            "r2c2",
+            "r4c11"
+          ]
+        },
+        {
+          "id": "c4",
+          "type": "implies",
+          "cells": [
+            "r6c8",
+            "r5c12"
+          ],
+          "values": [
+            "W",
+            "W"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r2c2": "B",
+      "r2c3": "B",
+      "r2c4": "B",
+      "r2c5": "W",
+      "r2c6": "W",
+      "r2c7": "W",
+      "r2c8": "W",
+      "r3c2": "B",
+      "r3c5": "W",
+      "r3c8": "W",
+      "r4c2": "W",
+      "r4c8": "W",
+      "r4c9": "W",
+      "r4c10": "W",
+      "r4c11": "B",
+      "r5c2": "W",
+      "r5c5": "W",
+      "r5c8": "B",
+      "r5c10": "W",
+      "r5c11": "W",
+      "r5c12": "W",
+      "r6c2": "W",
+      "r6c3": "W",
+      "r6c4": "W",
+      "r6c5": "W",
+      "r6c6": "B",
+      "r6c7": "B",
+      "r6c8": "B",
+      "r6c11": "B"
+    }
+  },
+  {
+    "id": "route-4-04",
+    "genre": "route",
+    "level": 4,
+    "title": "二段の転轍橋",
+    "goal": "レールを渡る回数の奇偶を使う",
+    "intro": "上の軌道から出発し、下の軌道で港に入ります。二つの数字を読むと、渡れる連絡橋は一本か二本まで絞れます。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "上下のレールの間を渡れるのはB3・D3・F3。Sは上側、Gは下側にある。"
+      },
+      {
+        "id": "c2",
+        "text": "C3の数字は2。上下左右で白が2マス。"
+      },
+      {
+        "id": "c3",
+        "text": "E3の数字も2。上下左右で白が2マス。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "C列のレールを一方ずつ指で追ってください。S側からG側へ抜けるのに、C2とC4を両方通れるでしょうか。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "C列もE列も上下のレールの片方だけを通ります。各「2」の残り1マスは左右の連絡橋。中央のD3を黒にした場合を試しましょう。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ]
+      },
+      {
+        "text": "中央のD3は白です。黒なら左右の数字からB3・F3が白になり、渡る回数が2回。上から出て上に戻ってしまい、下のG側に着けません。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r3c4": "W"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "二つの縦切れ目を読む",
+        "text": "A2からB2、最後はF4からG4を必ず通ります。C列を境にSとGは別側です。道は境を奇数回横切る必要があり、使える通路はC2とC4の二つだけ。よって一方だけが白です。E2とE4も同じです。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c2": "W",
+          "r4c6": "W"
+        }
+      },
+      {
+        "title": "連絡橋の仮定を試す",
+        "text": "各数字の上下で白は1つだから、残る左右のうち1つずつが白。D3が黒ならB3もF3も白です。渡る連絡橋が2本なら上から出て上に戻ります。Gは下にあるので矛盾。D3を白にします。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r3c4": "W"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r3c4": "B"
+            },
+            "before": [
+              "c1",
+              "c2"
+            ],
+            "by": "c3"
+          }
+        ]
+      },
+      {
+        "title": "二つの数字を同時に閉じる",
+        "text": "各数字の横の白はD3だけで足ります。B3・F3は黒。D3まで上、そこから下のレールを通り、切り替えは1回です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r3c2": "B",
+          "r3c6": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "二本のレールを塗り分け、一度だけ中央で乗り換えて港へ進みます。 曲がるマスだけを挙げると、Sから順に A1 → A2 → D2 → D4 → G4 → G6 → E6。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c1": "W",
+          "r2c3": "W",
+          "r2c4": "W",
+          "r2c5": "B",
+          "r2c6": "B",
+          "r4c2": "B",
+          "r4c3": "B",
+          "r4c4": "W",
+          "r4c5": "W",
+          "r4c7": "W",
+          "r5c7": "W",
+          "r6c6": "W",
+          "r6c7": "W"
+        }
+      }
+    ],
+    "pitfall": "一つの数字ずつ満たしても、連絡橋の本数が偶数だと出発した側へ戻ります。",
+    "transfer": "壁を仮に引き、その壁を何回横切れば始点から終点へ移れるか数える方法があります。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "境界の横断回数",
+        "連絡橋の奇偶"
+      ],
+      "notes": "作問レビューでは、境界の横断回数と連絡橋の奇偶を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 7,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2"
+        },
+        {
+          "key": "r2c2",
+          "label": "B2"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3",
+          "badge": "P"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "B",
+          "wall": true,
+          "badge": "2"
+        },
+        {
+          "key": "r3c4",
+          "label": "D3",
+          "badge": "Q"
+        },
+        {
+          "key": "r3c5",
+          "label": "E3",
+          "given": "B",
+          "wall": true,
+          "badge": "2"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3",
+          "badge": "R"
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4"
+        },
+        {
+          "key": "r4c4",
+          "label": "D4"
+        },
+        {
+          "key": "r4c5",
+          "label": "E4"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4"
+        },
+        {
+          "key": "r4c7",
+          "label": "G4"
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c3",
+          "label": "C5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c4",
+          "label": "D5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c5",
+          "label": "E5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c6",
+          "label": "F5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r6c6",
+          "label": "F6"
+        },
+        {
+          "key": "r6c7",
+          "label": "G6"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c6",
+          "label": "F7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r1c1",
+      "finish": "r6c5",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r3c3",
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "count",
+          "at": "r3c5",
+          "number": 2
+        }
+      ]
+    },
+    "solution": {
+      "r2c1": "W",
+      "r2c2": "W",
+      "r2c3": "W",
+      "r2c4": "W",
+      "r2c5": "B",
+      "r2c6": "B",
+      "r3c2": "B",
+      "r3c4": "W",
+      "r3c6": "B",
+      "r4c2": "B",
+      "r4c3": "B",
+      "r4c4": "W",
+      "r4c5": "W",
+      "r4c6": "W",
+      "r4c7": "W",
+      "r5c7": "W",
+      "r6c6": "W",
+      "r6c7": "W"
+    }
+  },
+  {
+    "id": "route-4-05",
+    "genre": "route",
+    "level": 4,
+    "title": "二枚扉の展示室",
+    "goal": "使わない区画の候補をまとめて消す",
+    "intro": "展示室には二枚の扉と二つの回廊があります。展示室を訪れる場合と素通りする場合で、白い信号を数えましょう。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "展示室はC5とG5で南の本線につながる。室内にある白もSからGへの道に含める。"
+      },
+      {
+        "id": "c2",
+        "text": "P（C5）・Q（E4）・R（E2）・X（J6）のうち、ちょうど2マスが白。"
+      },
+      {
+        "id": "c3",
+        "text": "R（E2）が白ならX（J6）も白。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "展示室に入って同じ扉から出ると、同じマスを二度通ります。入った場合に通る扉と回廊を数えましょう。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "展示室を使わないとP・Q・Rは白0マス。使うと入口Pと、回廊Q・Rの片方で白2マスです。Xが白だった場合、合計は2にできますか。",
+        "clues": [
+          "c1",
+          "c2"
+        ]
+      },
+      {
+        "text": "X（J6）は黒です。室内の三信号が作れる白の数は0か2。Xを白にすると合計は1か3となり、「ちょうど2」を満たせません。",
+        "clues": [
+          "c1",
+          "c2"
+        ],
+        "facts": {
+          "r6c10": "B"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "室内を二つの場合に分ける",
+        "text": "素通りなら室内に白を残すと孤立します。寄るならC5から入りG5から出て、間はQかRの一方だけを通ります。P・Q・Rの白は0個か2個です。もしXが白なら合計は1か3。したがってXは黒で、室内へ寄る必要があり、両扉は白です。",
+        "clues": [
+          "c1",
+          "c2"
+        ],
+        "facts": {
+          "r5c3": "W",
+          "r5c7": "W",
+          "r6c10": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r6c10": "W"
+            },
+            "before": [
+              "c1"
+            ],
+            "by": "c2"
+          },
+          {
+            "assume": {
+              "r5c3": "B"
+            },
+            "before": [
+              "c1"
+            ],
+            "by": "c2"
+          }
+        ]
+      },
+      {
+        "title": "窓の合図を逆から確かめる",
+        "text": "もし上の回廊Rが白なら、Xも白のはずです。Xが黒なのでRは黒。入口Pは白で、残る白1マスは下の回廊Qです。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r4c5": "W",
+          "r2c5": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r2c5": "W"
+            },
+            "before": [
+              "c1"
+            ],
+            "by": "c3"
+          }
+        ]
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "入室したので南の本線のうちC6とG6の間は使いません。回廊Qを経て本線へ帰り、I7側から出口へ進みます。 曲がるマスだけを挙げると、Sから順に A6 → C6 → C4 → G4 → G6 → I6 → I7 → J7 → J9。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c3": "B",
+          "r2c4": "B",
+          "r2c6": "B",
+          "r2c7": "B",
+          "r3c3": "B",
+          "r3c7": "B",
+          "r4c3": "W",
+          "r4c4": "W",
+          "r4c6": "W",
+          "r4c7": "W",
+          "r6c2": "W",
+          "r6c3": "W",
+          "r6c4": "B",
+          "r6c5": "B",
+          "r6c6": "B",
+          "r6c7": "W",
+          "r6c8": "W",
+          "r6c9": "W",
+          "r7c9": "W",
+          "r7c10": "W",
+          "r8c10": "W"
+        }
+      }
+    ],
+    "pitfall": "通らない展示室を黒にし忘れると、数字だけを満たす独立した白い線を作ってしまいます。",
+    "transfer": "まとまった区画ごとに、手がかりへ寄与できる個数を先に列挙しましょう。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "二つの扉の同時利用",
+        "区画ごとの個数の数え上げ"
+      ],
+      "notes": "作問レビューでは、二つの扉の同時利用と区画ごとの個数の数え上げを別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 10,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c2",
+          "label": "B2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2",
+          "badge": "R"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2"
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c10",
+          "label": "J2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c3",
+          "label": "C3"
+        },
+        {
+          "key": "r3c4",
+          "label": "D3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c5",
+          "label": "E3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c6",
+          "label": "F3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c7",
+          "label": "G3"
+        },
+        {
+          "key": "r3c8",
+          "label": "H3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c10",
+          "label": "J3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c3",
+          "label": "C4"
+        },
+        {
+          "key": "r4c4",
+          "label": "D4"
+        },
+        {
+          "key": "r4c5",
+          "label": "E4",
+          "badge": "Q"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4"
+        },
+        {
+          "key": "r4c7",
+          "label": "G4"
+        },
+        {
+          "key": "r4c8",
+          "label": "H4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c10",
+          "label": "J4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c3",
+          "label": "C5",
+          "badge": "P"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c5",
+          "label": "E5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c6",
+          "label": "F5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c10",
+          "label": "J5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r6c2",
+          "label": "B6"
+        },
+        {
+          "key": "r6c3",
+          "label": "C6"
+        },
+        {
+          "key": "r6c4",
+          "label": "D6"
+        },
+        {
+          "key": "r6c5",
+          "label": "E6"
+        },
+        {
+          "key": "r6c6",
+          "label": "F6"
+        },
+        {
+          "key": "r6c7",
+          "label": "G6"
+        },
+        {
+          "key": "r6c8",
+          "label": "H6"
+        },
+        {
+          "key": "r6c9",
+          "label": "I6"
+        },
+        {
+          "key": "r6c10",
+          "label": "J6",
+          "badge": "X"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c6",
+          "label": "F7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c8",
+          "label": "H7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c9",
+          "label": "I7"
+        },
+        {
+          "key": "r7c10",
+          "label": "J7"
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c3",
+          "label": "C8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c5",
+          "label": "E8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c6",
+          "label": "F8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c7",
+          "label": "G8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c9",
+          "label": "I8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c10",
+          "label": "J8"
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c8",
+          "label": "H9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c10",
+          "label": "J9",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r6c1",
+      "finish": "r9c10",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "quota",
+          "cells": [
+            "r5c3",
+            "r4c5",
+            "r2c5",
+            "r6c10"
+          ],
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "implies",
+          "cells": [
+            "r2c5",
+            "r6c10"
+          ],
+          "values": [
+            "W",
+            "W"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r2c3": "B",
+      "r2c4": "B",
+      "r2c5": "B",
+      "r2c6": "B",
+      "r2c7": "B",
+      "r3c3": "B",
+      "r3c7": "B",
+      "r4c3": "W",
+      "r4c4": "W",
+      "r4c5": "W",
+      "r4c6": "W",
+      "r4c7": "W",
+      "r5c3": "W",
+      "r5c7": "W",
+      "r6c2": "W",
+      "r6c3": "W",
+      "r6c4": "B",
+      "r6c5": "B",
+      "r6c6": "B",
+      "r6c7": "W",
+      "r6c8": "W",
+      "r6c9": "W",
+      "r6c10": "B",
+      "r7c9": "W",
+      "r7c10": "W",
+      "r8c10": "W"
+    }
+  },
+  {
+    "id": "route-4-06",
+    "genre": "route",
+    "level": 4,
+    "title": "交差点の二つの窓",
+    "goal": "中心の向きを両端の窓から決める",
+    "intro": "観測所の中心には四つの通路が集まります。中心の向きが変わると遠くの二つの窓がどちらも切り替わります。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "E5の塔を必ず通る。塔の北・西はS側の区画、東・南はG側の区画に通じる。"
+      },
+      {
+        "id": "c2",
+        "text": "F4の「1」はE4とF5の一方だけが白であることを示す。"
+      },
+      {
+        "id": "c3",
+        "text": "P（B1）とQ（D5）は同じ色。"
+      },
+      {
+        "id": "c4",
+        "text": "R（E6）とX（I7）は違う色。"
+      },
+      {
+        "id": "c5",
+        "text": "P（B1）・X（I7）・Y（E4）のうち、ちょうど2マスが白。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "塔に入れるのは北か西、塔を出られるのは東か南です。北から来た場合、黒い数字はどちらの出口をふさぐでしょう。",
+        "clues": [
+          "c1",
+          "c2"
+        ]
+      },
+      {
+        "text": "北のYを白とすると、西のQは使えず、数字から東の出口も使えません。残った南のRと両端のP・Xにその色を移してみましょう。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ]
+      },
+      {
+        "text": "Y（E4）は黒です。白ならQは黒なのでPも黒、塔は南のRへ抜けるのでXも黒。P・X・Yを合わせても白が1しかありません。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r4c5": "B"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "入口を一つ、出口を一つ",
+        "text": "塔に北と西の両方から入ると、二つの白い隣をS側だけで使い切り、G側に出られません。東・南にも同時には抜けられません。どちらの区画でも両側の通路が出会うC3とG7は必ず白です。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r3c3": "W",
+          "r7c7": "W"
+        }
+      },
+      {
+        "title": "北から入った場合を検証する",
+        "text": "Yを白と仮定すると西のQは黒でPも黒。数字1から東のF5は黒になり、塔の出口は南のR。そのRと違うXは黒です。P・X・Yの白はYだけになり、白2マスと矛盾します。よってYは黒です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r4c5": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r4c5": "W"
+            },
+            "before": [
+              "c1",
+              "c2",
+              "c3",
+              "c4"
+            ],
+            "by": "c5"
+          }
+        ]
+      },
+      {
+        "title": "横向きの塔から両端を見る",
+        "text": "数字1の残りF5が白。塔は西のQから入り、東のF5へ出るのでRは黒です。PはQと同じ白、XはRと違う白になります。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "facts": {
+          "r5c6": "W",
+          "r5c4": "W",
+          "r1c2": "W",
+          "r7c9": "W",
+          "r6c5": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "入口と出口の区画に一つずつ白の隣を確保してから、両端の窓を通る道だけを残します。 曲がるマスだけを挙げると、Sから順に A1 → B1 → B2 → C2 → C5 → G5 → G7 → I7 → I9。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c1": "B",
+          "r2c2": "W",
+          "r2c3": "W",
+          "r3c4": "B",
+          "r3c5": "B",
+          "r4c3": "W",
+          "r5c3": "W",
+          "r5c7": "W",
+          "r6c7": "W",
+          "r7c5": "B",
+          "r7c6": "B",
+          "r7c8": "W",
+          "r8c7": "B",
+          "r8c9": "W",
+          "r9c7": "B",
+          "r9c8": "B"
+        }
+      }
+    ],
+    "pitfall": "途中マスの隣が2個でも、両方とも同じ区画へ戻る向きだとGには続きません。",
+    "transfer": "接続点の次数に加え、二つの隣がどの区画へ通じているかも記録しましょう。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "接続点の入口と出口",
+        "離れた三つの点の同時検算"
+      ],
+      "notes": "作問レビューでは、接続点の入口と出口と離れた三つの点の同時検算を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 9,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "badge": "P"
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2"
+        },
+        {
+          "key": "r2c2",
+          "label": "B2"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c5",
+          "label": "E2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c6",
+          "label": "F2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c7",
+          "label": "G2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c3",
+          "label": "C3"
+        },
+        {
+          "key": "r3c4",
+          "label": "D3"
+        },
+        {
+          "key": "r3c5",
+          "label": "E3"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c3",
+          "label": "C4"
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c5",
+          "label": "E4",
+          "badge": "Y"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4",
+          "given": "B",
+          "wall": true,
+          "badge": "1"
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c8",
+          "label": "H4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c3",
+          "label": "C5"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5",
+          "badge": "Q"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5",
+          "given": "W",
+          "badge": "塔"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6",
+          "badge": "R"
+        },
+        {
+          "key": "r6c6",
+          "label": "F6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c7",
+          "label": "G6"
+        },
+        {
+          "key": "r6c8",
+          "label": "H6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7"
+        },
+        {
+          "key": "r7c6",
+          "label": "F7"
+        },
+        {
+          "key": "r7c7",
+          "label": "G7"
+        },
+        {
+          "key": "r7c8",
+          "label": "H7"
+        },
+        {
+          "key": "r7c9",
+          "label": "I7",
+          "badge": "X"
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c3",
+          "label": "C8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c5",
+          "label": "E8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c6",
+          "label": "F8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c7",
+          "label": "G8"
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c9",
+          "label": "I8"
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9"
+        },
+        {
+          "key": "r9c8",
+          "label": "H9"
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "W",
+          "badge": "G"
+        }
+      ],
+      "start": "r1c1",
+      "finish": "r9c9",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r4c6",
+          "number": 1
+        },
+        {
+          "id": "c3",
+          "type": "same",
+          "cells": [
+            "r1c2",
+            "r5c4"
+          ]
+        },
+        {
+          "id": "c4",
+          "type": "different",
+          "cells": [
+            "r6c5",
+            "r7c9"
+          ]
+        },
+        {
+          "id": "c5",
+          "type": "quota",
+          "cells": [
+            "r1c2",
+            "r7c9",
+            "r4c5"
+          ],
+          "number": 2
+        }
+      ]
+    },
+    "solution": {
+      "r1c2": "W",
+      "r2c1": "B",
+      "r2c2": "W",
+      "r2c3": "W",
+      "r3c3": "W",
+      "r3c4": "B",
+      "r3c5": "B",
+      "r4c3": "W",
+      "r4c5": "B",
+      "r5c3": "W",
+      "r5c4": "W",
+      "r5c6": "W",
+      "r5c7": "W",
+      "r6c5": "B",
+      "r6c7": "W",
+      "r7c5": "B",
+      "r7c6": "B",
+      "r7c7": "W",
+      "r7c8": "W",
+      "r7c9": "W",
+      "r8c7": "B",
+      "r8c9": "W",
+      "r9c7": "B",
+      "r9c8": "B"
+    }
+  },
+  {
+    "id": "route-5-02",
+    "genre": "route",
+    "level": 5,
+    "title": "ふたつの鐘の巡礼路",
+    "goal": "必須の角を通る順番と出口を結ぶ",
+    "intro": "北東と南西にある二つの鐘を必ず鳴らします。どちらを先に通るかで、中央の十字路を使う向きが変わります。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "「直」は縦または横に直進し、「曲」は直角に曲がる固定の白です。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "H2とB8の二つの鐘は固定の白。両方をSからGへの一本の道に含める。"
+      },
+      {
+        "id": "c2",
+        "text": "K8の「1」は、J8とK9の片方だけが白であることを示す。"
+      },
+      {
+        "id": "c3",
+        "text": "K10を直進する。"
+      },
+      {
+        "id": "c4",
+        "text": "R（F5）とT（L10）は同じ色。"
+      },
+      {
+        "id": "c5",
+        "text": "Q（H7）とP（B1）は同じ色。"
+      },
+      {
+        "id": "c6",
+        "text": "X（J8）が黒ならP（B1）も黒。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "二つの鐘はいずれも角にあり、入れる方向が二つしかありません。鐘から出る4本の直線を先に伸ばしましょう。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "南西の鐘B8を先に通ったと仮定します。北東の鐘を残してH8から出ることはできないので、E8から中央に上がります。中央のRと右端のQは何色でしょう。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "X（J8）は白です。南西を先に通ると中央は縦でRは黒、QとPは白。Tが黒なのでK10は縦、K9は白、数字からXは黒となります。Xが黒ならPも黒のはずなので、この順序は使えません。残る順は北東が先で、中央のRとTが白、K9が黒、Xが白です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5",
+          "c6"
+        ],
+        "facts": {
+          "r8c10": "W"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "鐘から四本の腕を伸ばす",
+        "text": "H2には西と南、B8には北と東しか入口がありません。四本の通路が届くE2・H5・B5・E8まで、途中に分岐はなく白が続きます。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c5": "W",
+          "r5c8": "W",
+          "r5c2": "W",
+          "r8c5": "W",
+          "r2c7": "W",
+          "r3c8": "W",
+          "r7c2": "W",
+          "r8c3": "W"
+        }
+      },
+      {
+        "title": "南西を先に通った順を試す",
+        "text": "B2から南へ行くと、B5で南の鐘への腕につながります。B8からE8へ来てH8へ出ると北東の鐘が残るので、E8からE5へ上がります。北側E2でB2へ戻れず、E2はE5とつながるため中央は縦。Rは黒、北東の鐘の後はH5からH8へ下るのでQが白です。Pは白、Tは黒。K10は東のTへ出ず縦に通り、北のK9は白。数字からXは黒となり、Xが黒ならPも黒を要求されますが、Qと同じPは白でした。この順は消えます。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5",
+          "c6"
+        ],
+        "facts": {
+          "r5c6": "W",
+          "r7c8": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r7c8": "W"
+            },
+            "before": [
+              "c1",
+              "c2",
+              "c3",
+              "c4",
+              "c5"
+            ],
+            "by": "c6"
+          }
+        ]
+      },
+      {
+        "title": "北東からの順で両端を閉じる",
+        "text": "北東の鐘へ先に進むとH5から中央を横断し、B5から南西の鐘を通ってE8、H8へ出ます。Qは黒なのでPも黒。Rと同じTは白です。K10から東へ出るため西から入り、K9は黒。K8を満たすXは白です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r10c12": "W",
+          "r8c10": "W",
+          "r1c2": "B",
+          "r9c11": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "中央を横に通る巡礼順と、K10を横に通る帰り道をそれぞれたどります。 曲がるマスだけを挙げると、Sから順に A1 → A2 → H2 → H5 → B5 → B8 → J8 → J10 → L10 → L11。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c1": "W",
+          "r2c2": "W",
+          "r2c3": "W",
+          "r2c4": "W",
+          "r2c6": "W",
+          "r3c2": "B",
+          "r3c5": "B",
+          "r4c2": "B",
+          "r4c5": "B",
+          "r4c8": "W",
+          "r5c3": "W",
+          "r5c4": "W",
+          "r5c5": "W",
+          "r5c7": "W",
+          "r6c2": "W",
+          "r6c5": "B",
+          "r6c8": "B",
+          "r7c5": "B",
+          "r8c4": "W",
+          "r8c6": "W",
+          "r8c7": "W",
+          "r8c8": "W",
+          "r8c9": "W",
+          "r9c9": "B",
+          "r9c10": "W",
+          "r10c10": "W",
+          "r11c11": "B"
+        }
+      }
+    ],
+    "pitfall": "最初の鐘から最寄りの出口へ出ると、もう一方の鐘を道に含められません。",
+    "transfer": "必須地点が複数あるとき、通過順を仮定して分岐を整理し、出口に着いた時点で未訪問の地点が残らないか調べましょう。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "二つの必須地点の訪問順",
+        "遠くの出口の条件で通過順を棄却"
+      ],
+      "notes": "作問レビューでは、二つの必須地点の訪問順と遠くの出口の条件で通過順を棄却を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 12,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "badge": "P"
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c11",
+          "label": "K1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c12",
+          "label": "L1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2"
+        },
+        {
+          "key": "r2c2",
+          "label": "B2"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2"
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "W",
+          "badge": "鐘"
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c10",
+          "label": "J2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c11",
+          "label": "K2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c12",
+          "label": "L2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c4",
+          "label": "D3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c5",
+          "label": "E3"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3"
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c10",
+          "label": "J3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c11",
+          "label": "K3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c12",
+          "label": "L3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c5",
+          "label": "E4"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c8",
+          "label": "H4"
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c10",
+          "label": "J4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c11",
+          "label": "K4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c12",
+          "label": "L4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5",
+          "badge": "R"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c10",
+          "label": "J5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c11",
+          "label": "K5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c12",
+          "label": "L5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6"
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6"
+        },
+        {
+          "key": "r6c6",
+          "label": "F6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c7",
+          "label": "G6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c8",
+          "label": "H6"
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c10",
+          "label": "J6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c11",
+          "label": "K6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c12",
+          "label": "L6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7"
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7"
+        },
+        {
+          "key": "r7c6",
+          "label": "F7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c8",
+          "label": "H7",
+          "badge": "Q"
+        },
+        {
+          "key": "r7c9",
+          "label": "I7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c10",
+          "label": "J7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c11",
+          "label": "K7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c12",
+          "label": "L7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "W",
+          "badge": "鐘"
+        },
+        {
+          "key": "r8c3",
+          "label": "C8"
+        },
+        {
+          "key": "r8c4",
+          "label": "D8"
+        },
+        {
+          "key": "r8c5",
+          "label": "E8"
+        },
+        {
+          "key": "r8c6",
+          "label": "F8"
+        },
+        {
+          "key": "r8c7",
+          "label": "G8"
+        },
+        {
+          "key": "r8c8",
+          "label": "H8"
+        },
+        {
+          "key": "r8c9",
+          "label": "I8"
+        },
+        {
+          "key": "r8c10",
+          "label": "J8",
+          "badge": "X"
+        },
+        {
+          "key": "r8c11",
+          "label": "K8",
+          "given": "B",
+          "wall": true,
+          "badge": "1"
+        },
+        {
+          "key": "r8c12",
+          "label": "L8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c8",
+          "label": "H9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c9",
+          "label": "I9"
+        },
+        {
+          "key": "r9c10",
+          "label": "J9"
+        },
+        {
+          "key": "r9c11",
+          "label": "K9"
+        },
+        {
+          "key": "r9c12",
+          "label": "L9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10"
+        },
+        {
+          "key": "r10c11",
+          "label": "K10",
+          "given": "W",
+          "badge": "直"
+        },
+        {
+          "key": "r10c12",
+          "label": "L10",
+          "badge": "T"
+        },
+        {
+          "key": "r11c1",
+          "label": "A11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c2",
+          "label": "B11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c3",
+          "label": "C11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c4",
+          "label": "D11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c5",
+          "label": "E11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c6",
+          "label": "F11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c7",
+          "label": "G11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c8",
+          "label": "H11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c9",
+          "label": "I11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c10",
+          "label": "J11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c11",
+          "label": "K11"
+        },
+        {
+          "key": "r11c12",
+          "label": "L11",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r12c1",
+          "label": "A12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c2",
+          "label": "B12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c3",
+          "label": "C12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c4",
+          "label": "D12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c5",
+          "label": "E12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c6",
+          "label": "F12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c7",
+          "label": "G12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c8",
+          "label": "H12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c9",
+          "label": "I12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c10",
+          "label": "J12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c11",
+          "label": "K12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c12",
+          "label": "L12",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r1c1",
+      "finish": "r11c12",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r8c11",
+          "number": 1
+        },
+        {
+          "id": "c3",
+          "type": "straight",
+          "at": "r10c11"
+        },
+        {
+          "id": "c4",
+          "type": "same",
+          "cells": [
+            "r5c6",
+            "r10c12"
+          ]
+        },
+        {
+          "id": "c5",
+          "type": "same",
+          "cells": [
+            "r7c8",
+            "r1c2"
+          ]
+        },
+        {
+          "id": "c6",
+          "type": "implies",
+          "cells": [
+            "r8c10",
+            "r1c2"
+          ],
+          "values": [
+            "B",
+            "B"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r1c2": "B",
+      "r2c1": "W",
+      "r2c2": "W",
+      "r2c3": "W",
+      "r2c4": "W",
+      "r2c5": "W",
+      "r2c6": "W",
+      "r2c7": "W",
+      "r3c2": "B",
+      "r3c5": "B",
+      "r3c8": "W",
+      "r4c2": "B",
+      "r4c5": "B",
+      "r4c8": "W",
+      "r5c2": "W",
+      "r5c3": "W",
+      "r5c4": "W",
+      "r5c5": "W",
+      "r5c6": "W",
+      "r5c7": "W",
+      "r5c8": "W",
+      "r6c2": "W",
+      "r6c5": "B",
+      "r6c8": "B",
+      "r7c2": "W",
+      "r7c5": "B",
+      "r7c8": "B",
+      "r8c3": "W",
+      "r8c4": "W",
+      "r8c5": "W",
+      "r8c6": "W",
+      "r8c7": "W",
+      "r8c8": "W",
+      "r8c9": "W",
+      "r8c10": "W",
+      "r9c9": "B",
+      "r9c10": "W",
+      "r9c11": "B",
+      "r10c10": "W",
+      "r10c12": "W",
+      "r11c11": "B"
+    }
+  },
+  {
+    "id": "route-5-03",
+    "genre": "route",
+    "level": 5,
+    "title": "二冊の検印簿",
+    "goal": "共通の数え方を差し引いて三方向を結ぶ",
+    "intro": "検印台を通過した記録が二冊残っています。書かれた個数は同じですが、数えた窓の組み合わせが一つだけ違います。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "D5の検印台は固定の白。北・東・西の三方向から出入りできる。"
+      },
+      {
+        "id": "c2",
+        "text": "第一の台帳では、N（D4）・P（B2）・Y（I5）のうち白は2マス。"
+      },
+      {
+        "id": "c3",
+        "text": "第二の台帳では、E（E5）・P（B2）・Y（I5）のうち白は2マス。"
+      },
+      {
+        "id": "c4",
+        "text": "K6の数字は1。隣の白は1マス。"
+      },
+      {
+        "id": "c5",
+        "text": "P（B2）が白なら、Z（J4）は黒。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "二冊で同じP・Yを指で隠し、残ったNとEだけを比べましょう。",
+        "clues": [
+          "c2",
+          "c3"
+        ]
+      },
+      {
+        "text": "NとEが同じ色と分かっても、どちらかはまだ不明です。もし両方が黒なら、D5の白い隣はいくつ残りますか。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ]
+      },
+      {
+        "text": "N（D4）は白です。数えた合計と共通のP・Yが同じなのでNとEは同色。両方黒だと検印台に残る隣は西一つだけで、道を通せません。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r4c4": "W"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "二冊を引き算する",
+        "text": "どちらの台帳でもPとYは同じマスの色を数えます。総数2も等しいので、その二つを除いたNとEは同色です。Nが黒ならEも黒となり、検印台には西側の隣しか残りません。よってN・Eは白、西のC5は黒です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3"
+        ],
+        "facts": {
+          "r4c4": "W",
+          "r5c5": "W",
+          "r5c3": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r4c4": "B"
+            },
+            "before": [
+              "c1",
+              "c2"
+            ],
+            "by": "c3"
+          }
+        ]
+      },
+      {
+        "title": "検印台に出入りする区画を決める",
+        "text": "B3から左辺を南へ進むと、B5からC5へ出られずB7へ進み、先に区画の出口F7に着いてしまいます。検印台を通るにはB3からD3へ進み、北のNで入り東のEからF5へ出て、F7へ下ります。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r3c3": "W",
+          "r3c4": "W",
+          "r5c6": "W",
+          "r6c6": "W",
+          "r4c2": "B",
+          "r7c2": "B"
+        }
+      },
+      {
+        "title": "離れた二組を一緒に反転する",
+        "text": "台帳でNが白なのでPとYの一方が白。もしPが白ならYは黒で、H7からJ5へはJ7・J6経由の下側になります。K6の1からK5は黒、J5からK4へのもう一方のJ4（Z）は白です。これはPが白ならZは黒という合図と矛盾。Pは黒でYは白です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r5c9": "W",
+          "r2c2": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r2c2": "W"
+            },
+            "before": [
+              "c1",
+              "c2",
+              "c4"
+            ],
+            "by": "c5"
+          }
+        ]
+      },
+      {
+        "title": "最後の数字に戻る",
+        "text": "Y経由で上を通るためJ6は黒。K6の1を満たすK5は白、もう一方のZは黒です。",
+        "clues": [
+          "c1",
+          "c4"
+        ],
+        "facts": {
+          "r5c11": "W",
+          "r4c10": "B",
+          "r6c10": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "検印台の北と東をつなぐ線、右岸の上側の線を順番にたどります。 曲がるマスだけを挙げると、Sから順に A2 → A3 → D3 → D5 → F5 → F7 → H7 → H5 → K5 → K2。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r3c1": "W",
+          "r3c2": "W",
+          "r3c5": "B",
+          "r3c6": "B",
+          "r3c11": "W",
+          "r4c6": "B",
+          "r4c11": "W",
+          "r5c2": "B",
+          "r5c8": "W",
+          "r5c10": "W",
+          "r6c2": "B",
+          "r6c8": "W",
+          "r7c3": "B",
+          "r7c4": "B",
+          "r7c5": "B",
+          "r7c6": "W",
+          "r7c7": "W",
+          "r7c8": "W",
+          "r7c9": "B",
+          "r7c10": "B"
+        }
+      }
+    ],
+    "pitfall": "同じ数の台帳でも、共通でない二つの窓まで最初から同じ内訳で塗ってはいけません。差し引いて分かるのはまず同色だけです。",
+    "transfer": "二つの数条件に共通の対象があれば消し合わせ、得た等式を局所の出入口数と組み合わせましょう。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "重複する個数条件の差し引き",
+        "三方向の必須点で同時に黒を除外"
+      ],
+      "notes": "作問レビューでは、重複する個数条件の差し引きと三方向の必須点で同時に黒を除外を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 11,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c11",
+          "label": "K1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r2c2",
+          "label": "B2",
+          "badge": "P"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c4",
+          "label": "D2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c5",
+          "label": "E2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c6",
+          "label": "F2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c7",
+          "label": "G2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c10",
+          "label": "J2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c11",
+          "label": "K2",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r3c1",
+          "label": "A3"
+        },
+        {
+          "key": "r3c2",
+          "label": "B3"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3"
+        },
+        {
+          "key": "r3c4",
+          "label": "D3"
+        },
+        {
+          "key": "r3c5",
+          "label": "E3"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3"
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c10",
+          "label": "J3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c11",
+          "label": "K3"
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "badge": "N"
+        },
+        {
+          "key": "r4c5",
+          "label": "E4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c6",
+          "label": "F4"
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c8",
+          "label": "H4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c10",
+          "label": "J4",
+          "badge": "Z"
+        },
+        {
+          "key": "r4c11",
+          "label": "K4"
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5",
+          "given": "W",
+          "badge": "台"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5",
+          "badge": "E"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "badge": "Y"
+        },
+        {
+          "key": "r5c10",
+          "label": "J5"
+        },
+        {
+          "key": "r5c11",
+          "label": "K5"
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6"
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c6",
+          "label": "F6"
+        },
+        {
+          "key": "r6c7",
+          "label": "G6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c8",
+          "label": "H6"
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c10",
+          "label": "J6"
+        },
+        {
+          "key": "r6c11",
+          "label": "K6",
+          "given": "B",
+          "wall": true,
+          "badge": "1"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7"
+        },
+        {
+          "key": "r7c3",
+          "label": "C7"
+        },
+        {
+          "key": "r7c4",
+          "label": "D7"
+        },
+        {
+          "key": "r7c5",
+          "label": "E7"
+        },
+        {
+          "key": "r7c6",
+          "label": "F7"
+        },
+        {
+          "key": "r7c7",
+          "label": "G7"
+        },
+        {
+          "key": "r7c8",
+          "label": "H7"
+        },
+        {
+          "key": "r7c9",
+          "label": "I7"
+        },
+        {
+          "key": "r7c10",
+          "label": "J7"
+        },
+        {
+          "key": "r7c11",
+          "label": "K7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c3",
+          "label": "C8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c5",
+          "label": "E8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c6",
+          "label": "F8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c7",
+          "label": "G8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c9",
+          "label": "I8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c10",
+          "label": "J8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c11",
+          "label": "K8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c8",
+          "label": "H9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c10",
+          "label": "J9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c11",
+          "label": "K9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c11",
+          "label": "K10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c1",
+          "label": "A11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c2",
+          "label": "B11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c3",
+          "label": "C11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c4",
+          "label": "D11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c5",
+          "label": "E11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c6",
+          "label": "F11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c7",
+          "label": "G11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c8",
+          "label": "H11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c9",
+          "label": "I11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c10",
+          "label": "J11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c11",
+          "label": "K11",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r2c1",
+      "finish": "r2c11",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "quota",
+          "cells": [
+            "r4c4",
+            "r2c2",
+            "r5c9"
+          ],
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "quota",
+          "cells": [
+            "r5c5",
+            "r2c2",
+            "r5c9"
+          ],
+          "number": 2
+        },
+        {
+          "id": "c4",
+          "type": "count",
+          "at": "r6c11",
+          "number": 1
+        },
+        {
+          "id": "c5",
+          "type": "implies",
+          "cells": [
+            "r2c2",
+            "r4c10"
+          ],
+          "values": [
+            "W",
+            "B"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r2c2": "B",
+      "r3c1": "W",
+      "r3c2": "W",
+      "r3c3": "W",
+      "r3c4": "W",
+      "r3c5": "B",
+      "r3c6": "B",
+      "r3c11": "W",
+      "r4c2": "B",
+      "r4c4": "W",
+      "r4c6": "B",
+      "r4c10": "B",
+      "r4c11": "W",
+      "r5c2": "B",
+      "r5c3": "B",
+      "r5c5": "W",
+      "r5c6": "W",
+      "r5c8": "W",
+      "r5c9": "W",
+      "r5c10": "W",
+      "r5c11": "W",
+      "r6c2": "B",
+      "r6c6": "W",
+      "r6c8": "W",
+      "r6c10": "B",
+      "r7c2": "B",
+      "r7c3": "B",
+      "r7c4": "B",
+      "r7c5": "B",
+      "r7c6": "W",
+      "r7c7": "W",
+      "r7c8": "W",
+      "r7c9": "B",
+      "r7c10": "B"
+    }
+  },
+  {
+    "id": "route-5-04",
+    "genre": "route",
+    "level": 5,
+    "title": "返送印の仕分け場",
+    "goal": "分岐が未確定のまま共通の結論を得る",
+    "intro": "送り状には、最初の分岐のどちらを使っても変わらない情報があります。先にその一マスを見つけ、返送印から入口へ戻りましょう。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "「直」は縦または横に直進し、「曲」は直角に曲がる固定の白です。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "D5からF5へは上・中央・下の三本のうち一本だけを使う。"
+      },
+      {
+        "id": "c2",
+        "text": "G4の「2」は上下左右で白が2マス。"
+      },
+      {
+        "id": "c3",
+        "text": "P（B4）が白ならQ（H4）は白。"
+      },
+      {
+        "id": "c4",
+        "text": "P（B4）が黒ならR（F7）は白。"
+      },
+      {
+        "id": "c5",
+        "text": "I4を直角に曲がる。"
+      },
+      {
+        "id": "c6",
+        "text": "Y（J4）が黒なら、P（B4）は黒。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "G5は仕分け場から出口へ向かう唯一の橋です。G4の2のうち、あと何個をTとQで作るか考えましょう。",
+        "clues": [
+          "c1",
+          "c2"
+        ]
+      },
+      {
+        "text": "Pが白の場合はQと数字から、黒の場合はRと三本の仕分け線から、同じTの色を求められます。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ]
+      },
+      {
+        "text": "T（F4）は黒です。Pが白ならQも白で、数字2はQと必須のG5で埋まります。Pが黒ならRが白で下の仕分け線を使うため、上の線のTは使えません。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "facts": {
+          "r4c6": "B"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "仕分け場の外へ渡る一マス",
+        "text": "左から右へ渡れるのはG5です。G4の隣は白のG5、T、Qの三つが候補で、G3は壁。TとQのうちちょうど一方が白になります。",
+        "clues": [
+          "c1",
+          "c2"
+        ],
+        "facts": {
+          "r5c7": "W"
+        }
+      },
+      {
+        "title": "入口を決めずに上段を除く",
+        "text": "Pが白の場合はQが白で数字からTは黒。Pが黒の場合はRが白なので下段を使い、同時に上段のTへは入れずTは黒です。どちらの仮定でも同じ場所が黒になります。入口Pはこの段階では保留できます。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "facts": {
+          "r4c6": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r4c2": "W",
+              "r4c6": "W"
+            },
+            "before": [
+              "c1",
+              "c2"
+            ],
+            "by": "c3"
+          },
+          {
+            "assume": {
+              "r4c6": "W",
+              "r4c2": "B"
+            },
+            "before": [
+              "c1",
+              "c2"
+            ],
+            "by": "c4"
+          }
+        ]
+      },
+      {
+        "title": "返送印を読む",
+        "text": "Tは黒なので数字からQは白。I4には西のQから入り、曲がる先は北のI3です。東のY（J4）は黒。返送印の条件でPも黒と決まり、今度は入口が確定します。",
+        "clues": [
+          "c1",
+          "c2",
+          "c5",
+          "c6"
+        ],
+        "facts": {
+          "r4c8": "W",
+          "r3c9": "W",
+          "r4c10": "B",
+          "r4c2": "B"
+        }
+      },
+      {
+        "title": "確定した入口の合図を使う",
+        "text": "Pが黒なのでRは白です。したがって三本の仕分け線では下段を使います。中央のE5は黒で、B5へはA5から進みます。",
+        "clues": [
+          "c1",
+          "c4"
+        ],
+        "facts": {
+          "r7c6": "W",
+          "r5c1": "W",
+          "r5c5": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "入口を決めるときに残した印と、どちらの場合にも成り立ったTの印を合わせて道を閉じます。 曲がるマスだけを挙げると、Sから順に A4 → A5 → D5 → D8 → F8 → F5 → H5 → H4 → I4 → I3 → J3 → J1。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c4": "B",
+          "r2c5": "B",
+          "r2c6": "B",
+          "r2c10": "W",
+          "r3c4": "B",
+          "r3c6": "B",
+          "r3c10": "W",
+          "r4c4": "B",
+          "r5c2": "W",
+          "r5c3": "W",
+          "r5c4": "W",
+          "r5c6": "W",
+          "r5c8": "W",
+          "r5c9": "B",
+          "r6c4": "W",
+          "r6c6": "W",
+          "r7c4": "W",
+          "r8c4": "W",
+          "r8c5": "W",
+          "r8c6": "W"
+        }
+      }
+    ],
+    "pitfall": "片方の仮定の中で決めたPの色を、両方に共通なTの色と一緒に確定しないようにしましょう。",
+    "transfer": "場合分けの表を上下二段に書き、両方の列に同じ結論が現れた項目だけを先に確定できます。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "両方の場合に共通する結論",
+        "曲がり角からの逆向きの条件伝播"
+      ],
+      "notes": "作問レビューでは、両方の場合に共通する結論と曲がり角からの逆向きの条件伝播を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 10,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r2c1",
+          "label": "A2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c2",
+          "label": "B2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c3",
+          "label": "C2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c4",
+          "label": "D2"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c9",
+          "label": "I2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c10",
+          "label": "J2"
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c4",
+          "label": "D3"
+        },
+        {
+          "key": "r3c5",
+          "label": "E3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c6",
+          "label": "F3"
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c9",
+          "label": "I3"
+        },
+        {
+          "key": "r3c10",
+          "label": "J3"
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r4c2",
+          "label": "B4",
+          "badge": "P"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c4",
+          "label": "D4"
+        },
+        {
+          "key": "r4c5",
+          "label": "E4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c6",
+          "label": "F4",
+          "badge": "T"
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true,
+          "badge": "2"
+        },
+        {
+          "key": "r4c8",
+          "label": "H4",
+          "badge": "Q"
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "W",
+          "badge": "曲"
+        },
+        {
+          "key": "r4c10",
+          "label": "J4",
+          "badge": "Y"
+        },
+        {
+          "key": "r5c1",
+          "label": "A5"
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5"
+        },
+        {
+          "key": "r5c10",
+          "label": "J5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6"
+        },
+        {
+          "key": "r6c5",
+          "label": "E6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c6",
+          "label": "F6"
+        },
+        {
+          "key": "r6c7",
+          "label": "G6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c8",
+          "label": "H6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c10",
+          "label": "J6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7"
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c6",
+          "label": "F7",
+          "badge": "R"
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c8",
+          "label": "H7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c9",
+          "label": "I7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c10",
+          "label": "J7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c3",
+          "label": "C8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c4",
+          "label": "D8"
+        },
+        {
+          "key": "r8c5",
+          "label": "E8"
+        },
+        {
+          "key": "r8c6",
+          "label": "F8"
+        },
+        {
+          "key": "r8c7",
+          "label": "G8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c9",
+          "label": "I8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c10",
+          "label": "J8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c4",
+          "label": "D9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c6",
+          "label": "F9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c8",
+          "label": "H9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c10",
+          "label": "J9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r4c1",
+      "finish": "r1c10",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r4c7",
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "implies",
+          "cells": [
+            "r4c2",
+            "r4c8"
+          ],
+          "values": [
+            "W",
+            "W"
+          ]
+        },
+        {
+          "id": "c4",
+          "type": "implies",
+          "cells": [
+            "r4c2",
+            "r7c6"
+          ],
+          "values": [
+            "B",
+            "W"
+          ]
+        },
+        {
+          "id": "c5",
+          "type": "turn",
+          "at": "r4c9"
+        },
+        {
+          "id": "c6",
+          "type": "implies",
+          "cells": [
+            "r4c10",
+            "r4c2"
+          ],
+          "values": [
+            "B",
+            "B"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r2c4": "B",
+      "r2c5": "B",
+      "r2c6": "B",
+      "r2c10": "W",
+      "r3c4": "B",
+      "r3c6": "B",
+      "r3c9": "W",
+      "r3c10": "W",
+      "r4c2": "B",
+      "r4c4": "B",
+      "r4c6": "B",
+      "r4c8": "W",
+      "r4c10": "B",
+      "r5c1": "W",
+      "r5c2": "W",
+      "r5c3": "W",
+      "r5c4": "W",
+      "r5c5": "B",
+      "r5c6": "W",
+      "r5c7": "W",
+      "r5c8": "W",
+      "r5c9": "B",
+      "r6c4": "W",
+      "r6c6": "W",
+      "r7c4": "W",
+      "r7c6": "W",
+      "r8c4": "W",
+      "r8c5": "W",
+      "r8c6": "W"
+    }
+  },
+  {
+    "id": "route-5-05",
+    "genre": "route",
+    "level": 5,
+    "title": "三つの門と底の灯台",
+    "goal": "孤立する白と細い通路の通過順を見抜く",
+    "intro": "湾の底には点灯中の灯台があり、上の通りと湾内を三つの門が結びます。東の細道でどの高さを渡るかが、門の開け方を左右します。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "S・G以外の英字は手がかりで使う信号の名前です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "E9の「灯」は必ず通る白。上の通りと湾内をつなぐ門はB3・E3・H3の三つ。"
+      },
+      {
+        "id": "c2",
+        "text": "I3の数字は2。上下左右で白が2マス。"
+      },
+      {
+        "id": "c3",
+        "text": "U（C5）とT（L5）は違う色。"
+      },
+      {
+        "id": "c4",
+        "text": "中央の門Q（E3）とV（K7）は同じ色。"
+      },
+      {
+        "id": "c5",
+        "text": "中央の門Q（E3）が白ならX（J3）は白。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "上の通りから湾内に入り、上へ戻ってからGへ行きます。湾内の固定の灯を通りながら使える門は何個でしょう。",
+        "clues": [
+          "c1"
+        ]
+      },
+      {
+        "text": "東の細道でV（K7）を通る場合は、下段で左から右へ渡ります。T（L5）も白にすると、同じ細道の上下を両方渡ることになる点に注目しましょう。",
+        "clues": [
+          "c1",
+          "c3",
+          "c4"
+        ]
+      },
+      {
+        "text": "中央の門Q（E3）は黒です。白ならVも白で下段を渡り、上段のTは黒、反対色のUは白。湾の上端Uを通るには左門が閉じ、中央・右の門を使います。右門H3と必須のI2で数字2が埋まり、Qが要求したXを白にできません。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r3c5": "B"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "門の個数と湾内の向きを決める",
+        "text": "SもGも湾の外ですが、中の灯E9を通るため一度は入ります。出入りが同数で門は三つしかないので、開けるのはちょうど二つ。門の間の短い上側を直行すると灯が残るため、下側の長い回廊を使います。その左右のB9・H9は必ず白です。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r9c2": "W",
+          "r9c8": "W",
+          "r2c9": "W"
+        }
+      },
+      {
+        "title": "細道と左の門を結ぶ",
+        "text": "K5とL7は細道の入口と出口で必ず白、L8もGへ続く白です。K7が白ならL7の白い隣はK7・L8で埋まりL6は黒。L5はK5以外の出口を失い、黒になります。またC5は左門B3が閉じた場合だけ白です。左門を開くとB5から灯へ南へ進み、その東のC5を使えません。左門が閉じる場合は中央からB5へ西に進んで灯へ向かうためC5を通ります。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r5c11": "W",
+          "r7c12": "W",
+          "r8c12": "W"
+        }
+      },
+      {
+        "title": "中央の門を仮に開ける",
+        "text": "Qが白ならVも白。下段で渡るためTは黒、違う色のUは白です。Uが白なら左門は閉じるため、もう一つの門は右のH3。数字2にはH3とI2が白なのでXは黒です。ところがQが白ならXは白のはず。この仮定は矛盾し、Qを黒に戻します。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r3c5": "B"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r3c5": "W"
+            },
+            "before": [
+              "c1",
+              "c2",
+              "c3",
+              "c4"
+            ],
+            "by": "c5"
+          }
+        ]
+      },
+      {
+        "title": "外側二つの門で戻る",
+        "text": "左のB3と右のH3が白で、湾の上端C5は黒。違う色のTは白なので、東では上段でK5からL5に渡ります。Qと同じVは黒、I3の2からXも黒です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
+        "facts": {
+          "r3c2": "W",
+          "r3c8": "W",
+          "r5c12": "W",
+          "r5c3": "B",
+          "r7c11": "B",
+          "r3c10": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "左門から灯へ下り、右門から戻ります。細道は上段で渡り、右列を下ってGへ進みます。 曲がるマスだけを挙げると、Sから順に A2 → B2 → B9 → H9 → H2 → K2 → K5 → L5 → L9。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r2c2": "W",
+          "r2c3": "B",
+          "r2c4": "B",
+          "r2c5": "B",
+          "r2c6": "B",
+          "r2c7": "B",
+          "r2c8": "W",
+          "r2c10": "W",
+          "r2c11": "W",
+          "r3c11": "W",
+          "r4c2": "W",
+          "r4c5": "B",
+          "r4c8": "W",
+          "r4c11": "W",
+          "r5c2": "W",
+          "r5c4": "B",
+          "r5c5": "B",
+          "r5c6": "B",
+          "r5c7": "B",
+          "r5c8": "W",
+          "r6c2": "W",
+          "r6c8": "W",
+          "r6c11": "B",
+          "r6c12": "W",
+          "r7c2": "W",
+          "r7c8": "W",
+          "r8c2": "W",
+          "r8c8": "W",
+          "r9c3": "W",
+          "r9c4": "W",
+          "r9c6": "W",
+          "r9c7": "W"
+        }
+      }
+    ],
+    "pitfall": "湾内の頂上同士を最短距離で結ぶと、下の灯が白のまま道から離れます。",
+    "transfer": "始点も終点も外にある区画は出入りの組数を数え、内部の必須地点をどちら側に残さず通れるか調べましょう。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "境界を出入りする門の数",
+        "孤立を避ける長い弧と細道の通過段"
+      ],
+      "notes": "作問レビューでは、境界を出入りする門の数と孤立を避ける長い弧と細道の通過段を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 12,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c2",
+          "label": "B1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c4",
+          "label": "D1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c6",
+          "label": "F1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c8",
+          "label": "H1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c10",
+          "label": "J1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c11",
+          "label": "K1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r1c12",
+          "label": "L1",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c1",
+          "label": "A2",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r2c2",
+          "label": "B2"
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2"
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2"
+        },
+        {
+          "key": "r2c7",
+          "label": "G2"
+        },
+        {
+          "key": "r2c8",
+          "label": "H2"
+        },
+        {
+          "key": "r2c9",
+          "label": "I2"
+        },
+        {
+          "key": "r2c10",
+          "label": "J2"
+        },
+        {
+          "key": "r2c11",
+          "label": "K2"
+        },
+        {
+          "key": "r2c12",
+          "label": "L2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c2",
+          "label": "B3"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c4",
+          "label": "D3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c5",
+          "label": "E3",
+          "badge": "Q"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r3c8",
+          "label": "H3"
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "B",
+          "wall": true,
+          "badge": "2"
+        },
+        {
+          "key": "r3c10",
+          "label": "J3",
+          "badge": "X"
+        },
+        {
+          "key": "r3c11",
+          "label": "K3"
+        },
+        {
+          "key": "r3c12",
+          "label": "L3",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c1",
+          "label": "A4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c2",
+          "label": "B4"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c5",
+          "label": "E4"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c7",
+          "label": "G4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c8",
+          "label": "H4"
+        },
+        {
+          "key": "r4c9",
+          "label": "I4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c10",
+          "label": "J4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c11",
+          "label": "K4"
+        },
+        {
+          "key": "r4c12",
+          "label": "L4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5",
+          "badge": "U"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c10",
+          "label": "J5",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r5c11",
+          "label": "K5"
+        },
+        {
+          "key": "r5c12",
+          "label": "L5",
+          "badge": "T"
+        },
+        {
+          "key": "r6c1",
+          "label": "A6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c2",
+          "label": "B6"
+        },
+        {
+          "key": "r6c3",
+          "label": "C6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c6",
+          "label": "F6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c7",
+          "label": "G6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c8",
+          "label": "H6"
+        },
+        {
+          "key": "r6c9",
+          "label": "I6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c10",
+          "label": "J6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c11",
+          "label": "K6"
+        },
+        {
+          "key": "r6c12",
+          "label": "L6"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c2",
+          "label": "B7"
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c4",
+          "label": "D7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c6",
+          "label": "F7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c8",
+          "label": "H7"
+        },
+        {
+          "key": "r7c9",
+          "label": "I7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c10",
+          "label": "J7",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r7c11",
+          "label": "K7",
+          "badge": "V"
+        },
+        {
+          "key": "r7c12",
+          "label": "L7"
+        },
+        {
+          "key": "r8c1",
+          "label": "A8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c2",
+          "label": "B8"
+        },
+        {
+          "key": "r8c3",
+          "label": "C8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c5",
+          "label": "E8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c6",
+          "label": "F8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c7",
+          "label": "G8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c8",
+          "label": "H8"
+        },
+        {
+          "key": "r8c9",
+          "label": "I8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c10",
+          "label": "J8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c11",
+          "label": "K8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c12",
+          "label": "L8"
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c2",
+          "label": "B9"
+        },
+        {
+          "key": "r9c3",
+          "label": "C9"
+        },
+        {
+          "key": "r9c4",
+          "label": "D9"
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r9c6",
+          "label": "F9"
+        },
+        {
+          "key": "r9c7",
+          "label": "G9"
+        },
+        {
+          "key": "r9c8",
+          "label": "H9"
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c10",
+          "label": "J9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c11",
+          "label": "K9",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r9c12",
+          "label": "L9",
+          "given": "W",
+          "badge": "G"
+        },
+        {
+          "key": "r10c1",
+          "label": "A10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c2",
+          "label": "B10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c3",
+          "label": "C10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c4",
+          "label": "D10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c5",
+          "label": "E10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c6",
+          "label": "F10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c7",
+          "label": "G10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c8",
+          "label": "H10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c9",
+          "label": "I10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c10",
+          "label": "J10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c11",
+          "label": "K10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r10c12",
+          "label": "L10",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c1",
+          "label": "A11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c2",
+          "label": "B11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c3",
+          "label": "C11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c4",
+          "label": "D11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c5",
+          "label": "E11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c6",
+          "label": "F11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c7",
+          "label": "G11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c8",
+          "label": "H11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c9",
+          "label": "I11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c10",
+          "label": "J11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c11",
+          "label": "K11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r11c12",
+          "label": "L11",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c1",
+          "label": "A12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c2",
+          "label": "B12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c3",
+          "label": "C12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c4",
+          "label": "D12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c5",
+          "label": "E12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c6",
+          "label": "F12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c7",
+          "label": "G12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c8",
+          "label": "H12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c9",
+          "label": "I12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c10",
+          "label": "J12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c11",
+          "label": "K12",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r12c12",
+          "label": "L12",
+          "given": "B",
+          "wall": true
+        }
+      ],
+      "start": "r2c1",
+      "finish": "r9c12",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r3c9",
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "different",
+          "cells": [
+            "r5c3",
+            "r5c12"
+          ]
+        },
+        {
+          "id": "c4",
+          "type": "same",
+          "cells": [
+            "r3c5",
+            "r7c11"
+          ]
+        },
+        {
+          "id": "c5",
+          "type": "implies",
+          "cells": [
+            "r3c5",
+            "r3c10"
+          ],
+          "values": [
+            "W",
+            "W"
+          ]
+        }
+      ]
+    },
+    "solution": {
+      "r2c2": "W",
+      "r2c3": "B",
+      "r2c4": "B",
+      "r2c5": "B",
+      "r2c6": "B",
+      "r2c7": "B",
+      "r2c8": "W",
+      "r2c9": "W",
+      "r2c10": "W",
+      "r2c11": "W",
+      "r3c2": "W",
+      "r3c5": "B",
+      "r3c8": "W",
+      "r3c10": "B",
+      "r3c11": "W",
+      "r4c2": "W",
+      "r4c5": "B",
+      "r4c8": "W",
+      "r4c11": "W",
+      "r5c2": "W",
+      "r5c3": "B",
+      "r5c4": "B",
+      "r5c5": "B",
+      "r5c6": "B",
+      "r5c7": "B",
+      "r5c8": "W",
+      "r5c11": "W",
+      "r5c12": "W",
+      "r6c2": "W",
+      "r6c8": "W",
+      "r6c11": "B",
+      "r6c12": "W",
+      "r7c2": "W",
+      "r7c8": "W",
+      "r7c11": "B",
+      "r7c12": "W",
+      "r8c2": "W",
+      "r8c8": "W",
+      "r8c12": "W",
+      "r9c2": "W",
+      "r9c3": "W",
+      "r9c4": "W",
+      "r9c6": "W",
+      "r9c7": "W",
+      "r9c8": "W"
+    }
+  },
+  {
+    "id": "route-5-06",
+    "genre": "route",
+    "level": 5,
+    "title": "二十五灯の夜間巡回",
+    "goal": "ひとつしか残らない出入口から仮定を棄却する",
+    "intro": "夜間の巡回では、格子に並ぶ25灯のすべてを一本の道で結びます。局所的には正しく見える線が、ほかの灯から切り離されていないか確かめましょう。",
+    "skills": [
+      "仮定と場合分け",
+      "矛盾の検出",
+      "全体構造の把握",
+      "複数条件の統合",
+      "離れた情報の関連づけ"
+    ],
+    "rules": [
+      "白は通るマス、黒は通らないマスです。空きマスをすべて白か黒にします。最初から色の付いたマスは固定です。",
+      "上下左右で隣り合う白は必ずつながります。すべての白でSからGへ輪も枝分かれもない一本の道を作ります。S・Gでは隣の白が1マス、ほかの白では2マス必要です。",
+      "黒マスの数字は、上下左右に隣り合う白マスの数です。斜めは数えません。",
+      "「直」は縦または横に直進し、「曲」は直角に曲がる固定の白です。",
+      "位置は列の英字と上からの行番号で表します。B3は左から2列目、上から3行目です。"
+    ],
+    "clues": [
+      {
+        "id": "c1",
+        "text": "S・Gと23個の中継灯は最初から白。灯と灯を結ぶ空きマスを塗り、すべての灯をSからGへの一本の道に含める。"
+      },
+      {
+        "id": "c2",
+        "text": "B4の数字は2。上下左右の通路のうち2マスが白。"
+      },
+      {
+        "id": "c3",
+        "text": "H8の数字は3。上下左右の通路のうち3マスが白。"
+      },
+      {
+        "id": "c4",
+        "text": "G1の灯では直角に曲がる。"
+      },
+      {
+        "id": "c5",
+        "text": "C1の灯では直進する。"
+      }
+    ],
+    "hints": [
+      {
+        "text": "上端の「直」「曲」と、右上角I1の灯から始めましょう。道が使えなくなったら、右上の六つの灯と外側をつなぐ境目に印を付けます。",
+        "clues": [
+          "c1",
+          "c4",
+          "c5"
+        ]
+      },
+      {
+        "text": "ゴールの左、H9を黒と仮定します。H8の「3」を使うと、右上の六灯から南へ出るG6・I6が閉じます。左側には何本の通路が残るでしょう。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ]
+      },
+      {
+        "text": "H9は白です。上端とB4からF1・F3は閉じます。H9を黒にすると「3」からH7・G8・I8が白、G6・I6も閉じます。右上六灯に入る通路はF5一つだけ。SもGも外なので六灯を通って外に戻れません。",
+        "clues": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "facts": {
+          "r9c8": "W"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "title": "上辺の直線から数字へ渡す",
+        "text": "C1は上端で直進するためB1・D1は白、C2は黒。SはB1とつながったのでA2は黒となり、A3の白い隣はB3・A4だけです。B4の2がこの2マスで埋まり、B5・C4は黒です。",
+        "clues": [
+          "c1",
+          "c2",
+          "c5"
+        ],
+        "facts": {
+          "r1c2": "W",
+          "r1c4": "W",
+          "r3c2": "W",
+          "r4c1": "W",
+          "r2c3": "B",
+          "r2c1": "B",
+          "r5c2": "B",
+          "r4c3": "B"
+        }
+      },
+      {
+        "title": "六灯の区画の左辺を調べる",
+        "text": "角I1はH1・I2を白にします。G1は東のH1から南へ曲がるのでG2は白、F1は黒。E1はD1のほかにE2が必要です。C3はB3とD3を結ぶしかなく、E3の白い隣はD3・E2で埋まりF3・E4は黒です。右上の六灯（G列・I列の1・3・5行目）と左側をつなぐF1・F3・F5のうち、すでに二本が閉じました。",
+        "clues": [
+          "c1",
+          "c4"
+        ],
+        "facts": {
+          "r1c8": "W",
+          "r2c9": "W",
+          "r2c7": "W",
+          "r2c5": "W",
+          "r3c4": "W",
+          "r1c6": "B",
+          "r3c6": "B",
+          "r4c5": "B"
+        }
+      },
+      {
+        "title": "六灯の出入口が一つになる仮定",
+        "text": "H9が黒なら、H8の3からH7・G8・I8がすべて白です。G7の隣はH7・G8で、I7の隣はH7・I8で埋まるため、南の境界G6・I6は黒。六灯から外に出られるのはF5一本だけになります。SとGはともに区画外なので、六灯を訪れて戻るには別々の出入口が必要です。H9は白と確定します。",
+        "clues": [
+          "c1",
+          "c3"
+        ],
+        "facts": {
+          "r9c8": "W"
+        },
+        "cases": [
+          {
+            "assume": {
+              "r9c8": "B"
+            },
+            "before": [
+              "c1"
+            ],
+            "by": "c3"
+          }
+        ]
+      },
+      {
+        "title": "右下から反時計回りに押し戻す",
+        "text": "Gの隣H9が白なのでI8は黒。H8の3からH7・G8が白です。G7の上G6と左F7は黒、I7から上のI6は白。G9はH9・G8につながるのでF9が黒、E9を通すD9・E8は白になります。",
+        "clues": [
+          "c1",
+          "c3"
+        ],
+        "facts": {
+          "r7c8": "W",
+          "r8c7": "W",
+          "r6c9": "W",
+          "r9c4": "W",
+          "r8c5": "W",
+          "r8c9": "B",
+          "r6c7": "B",
+          "r9c6": "B"
+        }
+      },
+      {
+        "title": "下辺と左辺の確定を合わせる",
+        "text": "角A9でA8・B9が白。A5はA4からA6に続くのでA7の東隣のB7は黒です。C5では使えないC4・B5の反対のD5・C6が白。C9はB9・D9で埋まるためC8は黒です。C7の出口はD7だけ。E7はD7・E8で埋まり、E6も黒となります。E5は左右のD5・F5でつなぎます。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r8c1": "W",
+          "r9c2": "W",
+          "r6c1": "W",
+          "r5c4": "W",
+          "r6c3": "W",
+          "r7c4": "W",
+          "r5c6": "W",
+          "r7c2": "B",
+          "r8c3": "B",
+          "r6c5": "B"
+        }
+      },
+      {
+        "title": "最後の小さな輪を見つける",
+        "text": "もしH3を白にすると、G1→I1→I3→G3→G1の四灯がすでに白のH1・I2・G2と合わせて輪になります。H3は黒なのでG3はG4へ、I3はI4へつないで輪を開きます。G5では左のF5と上のG4が白い隣となるので、H5は黒です。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r4c7": "W",
+          "r4c9": "W",
+          "r3c8": "B",
+          "r5c8": "B"
+        }
+      },
+      {
+        "title": "一本道を通して確認する",
+        "text": "中継灯ごとに白い隣が二つあることを確かめ、ふさがった区画を残さず25灯を通り抜けます。 曲がるマスだけを挙げると、Sから順に A1 → E1 → E3 → A3 → A9 → E9 → E7 → C7 → C5 → G5 → G1 → I1 → I7 → G7 → G9 → I9。途中の直線も白にし、通らない空きマスを黒にします。",
+        "clues": [
+          "c1"
+        ],
+        "facts": {
+          "r7c6": "B"
+        }
+      }
+    ],
+    "pitfall": "各灯の隣が2マスあっても、外側と切れた区画や輪はそのまま残ることがあります。",
+    "transfer": "区画の境界に残る出入口の数を数えましょう。始点も終点も外にあれば、一つの入口だけでは中の必須地点を訪問できません。",
+    "review": {
+      "levelReviewed": true,
+      "techniques": [
+        "固定白を含む区画の孤立検出",
+        "局所の次数と全体の閉路の区別"
+      ],
+      "notes": "作問レビューでは、固定白を含む区画の孤立検出と局所の次数と全体の閉路の区別を別々の段階で練習できることを確認しました。難易度はプレイヤー試遊前の評価です。",
+      "explanationReviewed": true
+    },
+    "board": {
+      "size": 9,
+      "cells": [
+        {
+          "key": "r1c1",
+          "label": "A1",
+          "given": "W",
+          "badge": "S"
+        },
+        {
+          "key": "r1c2",
+          "label": "B1"
+        },
+        {
+          "key": "r1c3",
+          "label": "C1",
+          "given": "W",
+          "badge": "直"
+        },
+        {
+          "key": "r1c4",
+          "label": "D1"
+        },
+        {
+          "key": "r1c5",
+          "label": "E1",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r1c6",
+          "label": "F1"
+        },
+        {
+          "key": "r1c7",
+          "label": "G1",
+          "given": "W",
+          "badge": "曲"
+        },
+        {
+          "key": "r1c8",
+          "label": "H1"
+        },
+        {
+          "key": "r1c9",
+          "label": "I1",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r2c1",
+          "label": "A2"
+        },
+        {
+          "key": "r2c2",
+          "label": "B2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c3",
+          "label": "C2"
+        },
+        {
+          "key": "r2c4",
+          "label": "D2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c5",
+          "label": "E2"
+        },
+        {
+          "key": "r2c6",
+          "label": "F2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c7",
+          "label": "G2"
+        },
+        {
+          "key": "r2c8",
+          "label": "H2",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r2c9",
+          "label": "I2"
+        },
+        {
+          "key": "r3c1",
+          "label": "A3",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r3c2",
+          "label": "B3"
+        },
+        {
+          "key": "r3c3",
+          "label": "C3",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r3c4",
+          "label": "D3"
+        },
+        {
+          "key": "r3c5",
+          "label": "E3",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r3c6",
+          "label": "F3"
+        },
+        {
+          "key": "r3c7",
+          "label": "G3",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r3c8",
+          "label": "H3"
+        },
+        {
+          "key": "r3c9",
+          "label": "I3",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r4c1",
+          "label": "A4"
+        },
+        {
+          "key": "r4c2",
+          "label": "B4",
+          "given": "B",
+          "wall": true,
+          "badge": "2"
+        },
+        {
+          "key": "r4c3",
+          "label": "C4"
+        },
+        {
+          "key": "r4c4",
+          "label": "D4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c5",
+          "label": "E4"
+        },
+        {
+          "key": "r4c6",
+          "label": "F4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c7",
+          "label": "G4"
+        },
+        {
+          "key": "r4c8",
+          "label": "H4",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r4c9",
+          "label": "I4"
+        },
+        {
+          "key": "r5c1",
+          "label": "A5",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r5c2",
+          "label": "B5"
+        },
+        {
+          "key": "r5c3",
+          "label": "C5",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r5c4",
+          "label": "D5"
+        },
+        {
+          "key": "r5c5",
+          "label": "E5",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r5c6",
+          "label": "F5"
+        },
+        {
+          "key": "r5c7",
+          "label": "G5",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r5c8",
+          "label": "H5"
+        },
+        {
+          "key": "r5c9",
+          "label": "I5",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r6c1",
+          "label": "A6"
+        },
+        {
+          "key": "r6c2",
+          "label": "B6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c3",
+          "label": "C6"
+        },
+        {
+          "key": "r6c4",
+          "label": "D6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c5",
+          "label": "E6"
+        },
+        {
+          "key": "r6c6",
+          "label": "F6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c7",
+          "label": "G6"
+        },
+        {
+          "key": "r6c8",
+          "label": "H6",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r6c9",
+          "label": "I6"
+        },
+        {
+          "key": "r7c1",
+          "label": "A7",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r7c2",
+          "label": "B7"
+        },
+        {
+          "key": "r7c3",
+          "label": "C7",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r7c4",
+          "label": "D7"
+        },
+        {
+          "key": "r7c5",
+          "label": "E7",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r7c6",
+          "label": "F7"
+        },
+        {
+          "key": "r7c7",
+          "label": "G7",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r7c8",
+          "label": "H7"
+        },
+        {
+          "key": "r7c9",
+          "label": "I7",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r8c1",
+          "label": "A8"
+        },
+        {
+          "key": "r8c2",
+          "label": "B8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c3",
+          "label": "C8"
+        },
+        {
+          "key": "r8c4",
+          "label": "D8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c5",
+          "label": "E8"
+        },
+        {
+          "key": "r8c6",
+          "label": "F8",
+          "given": "B",
+          "wall": true
+        },
+        {
+          "key": "r8c7",
+          "label": "G8"
+        },
+        {
+          "key": "r8c8",
+          "label": "H8",
+          "given": "B",
+          "wall": true,
+          "badge": "3"
+        },
+        {
+          "key": "r8c9",
+          "label": "I8"
+        },
+        {
+          "key": "r9c1",
+          "label": "A9",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r9c2",
+          "label": "B9"
+        },
+        {
+          "key": "r9c3",
+          "label": "C9",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r9c4",
+          "label": "D9"
+        },
+        {
+          "key": "r9c5",
+          "label": "E9",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r9c6",
+          "label": "F9"
+        },
+        {
+          "key": "r9c7",
+          "label": "G9",
+          "given": "W",
+          "badge": "灯"
+        },
+        {
+          "key": "r9c8",
+          "label": "H9"
+        },
+        {
+          "key": "r9c9",
+          "label": "I9",
+          "given": "W",
+          "badge": "G"
+        }
+      ],
+      "start": "r1c1",
+      "finish": "r9c9",
+      "constraints": [
+        {
+          "id": "c2",
+          "type": "count",
+          "at": "r4c2",
+          "number": 2
+        },
+        {
+          "id": "c3",
+          "type": "count",
+          "at": "r8c8",
+          "number": 3
+        },
+        {
+          "id": "c4",
+          "type": "turn",
+          "at": "r1c7"
+        },
+        {
+          "id": "c5",
+          "type": "straight",
+          "at": "r1c3"
+        }
+      ]
+    },
+    "solution": {
+      "r1c2": "W",
+      "r1c4": "W",
+      "r1c6": "B",
+      "r1c8": "W",
+      "r2c1": "B",
+      "r2c3": "B",
+      "r2c5": "W",
+      "r2c7": "W",
+      "r2c9": "W",
+      "r3c2": "W",
+      "r3c4": "W",
+      "r3c6": "B",
+      "r3c8": "B",
+      "r4c1": "W",
+      "r4c3": "B",
+      "r4c5": "B",
+      "r4c7": "W",
+      "r4c9": "W",
+      "r5c2": "B",
+      "r5c4": "W",
+      "r5c6": "W",
+      "r5c8": "B",
+      "r6c1": "W",
+      "r6c3": "W",
+      "r6c5": "B",
+      "r6c7": "B",
+      "r6c9": "W",
+      "r7c2": "B",
+      "r7c4": "W",
+      "r7c6": "B",
+      "r7c8": "W",
+      "r8c1": "W",
+      "r8c3": "B",
+      "r8c5": "W",
+      "r8c7": "W",
+      "r8c9": "B",
+      "r9c2": "W",
+      "r9c4": "W",
+      "r9c6": "B",
+      "r9c8": "W"
+    }
+  }
+]
