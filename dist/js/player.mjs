@@ -13,8 +13,8 @@ function sourceName(p,b,id){
   if(id.startsWith('c:'))return '条件 '+(p.clues.findIndex(c=>c.id===id.slice(2))+1);
   return markName(p,b,id.slice(2));
 }
-export function clueList(p,b,action){
-  return `<ol class="clues">${p.clues.map((c,i)=>`<li><button type="button" data-action="${action}" data-id="${E(c.id)}" class="clue ${b.focus===c.id?'on':''}" aria-pressed="${b.focus===c.id}"><b>${String(i+1).padStart(2,'0')}</b><span>${E(c.text)}</span></button></li>`).join('')}</ol>`;
+function clueList(p,b){
+  return `<ol class="clues">${p.clues.map((c,i)=>`<li><button type="button" data-action="focus" data-id="${E(c.id)}" class="clue ${b.focus===c.id?'on':''}" aria-pressed="${b.focus===c.id}"><b>${String(i+1).padStart(2,'0')}</b><span>${E(c.text)}</span></button></li>`).join('')}</ol>`;
 }
 function routeBoard(p,a,u){
   const {size:n,cells}=p.board,b=a.frame.board,all=cells.map(c=>c.given||b.marks[c.key]);
@@ -76,9 +76,9 @@ export function player(p,a,u){
   const opts=route?[['W','○ 白'],['B','■ 黒'],['inspect','調べる'],['erase','消す']]:[['mark','○ 入れる'],['cross','× 除外'],['inspect','調べる'],['erase','消す']];
   const focus=p.clues.find(c=>c.id===b.focus);
   return `${link('genre/'+p.genre,g.name,'crumb')}<div class="play-heading"><div><div class="line-meta">Lv.${p.level} ・ ${a.mode==='review'?'重点復習':g.name}</div><h1>${E(p.title)}</h1><p>${E(p.intro)}</p></div></div>
-  <div class="play-grid"><div class="play-primary"><section class="panel board-panel"><div class="board-heading"><div><h2>${route?'ルート盤面':p.genre==='symbol'?'数字の候補表':'推理の対応表'}</h2><span class="quiet">${route?(p.board.size+' × '+p.board.size+'　'):''}${completed} / ${total} 入力</span></div><div class="zoom" aria-label="盤面の拡大縮小">${route?act('fit',u.fit?'入力表示':'全体表示',`aria-pressed="${Boolean(u.fit)}"`,'btn small fit-btn'):''}${u.fit?'':act('zoom-out','−',`aria-label="盤面を縮小" ${dis(u.zoom<=.75)}`,'icon-btn')+`<span>${Math.round(u.zoom*100)}%</span>`+act('zoom-in','＋',`aria-label="盤面を拡大" ${dis(u.zoom>=1.75)}`,'icon-btn')}</div></div>
+  <div class="play-grid"><section class="panel padded" id="clue-panel" tabindex="-1"><div class="mini-heading">${I('list',18)}<h2>手がかり</h2></div>${clueList(p,b)}</section><div class="play-primary"><section class="panel board-panel"><div class="board-heading"><div><h2>${route?'ルート盤面':p.genre==='symbol'?'数字の候補表':'推理の対応表'}</h2><span class="quiet">${route?(p.board.size+' × '+p.board.size+'　'):''}${completed} / ${total} 入力</span></div><div class="zoom" aria-label="盤面の拡大縮小">${route?act('fit',u.fit?'入力表示':'全体表示',`aria-pressed="${Boolean(u.fit)}"`,'btn small fit-btn'):''}${u.fit?'':act('zoom-out','−',`aria-label="盤面を縮小" ${dis(u.zoom<=.75)}`,'icon-btn')+`<span>${Math.round(u.zoom*100)}%</span>`+act('zoom-in','＋',`aria-label="盤面を拡大" ${dis(u.zoom>=1.75)}`,'icon-btn')}</div></div>
   ${p.board.equations?`<div class="equations" aria-label="計算式">${p.board.equations.map(eq=>`<div>${E(eq)}</div>`).join('')}</div>`:''}
-  <div class="focus-strip">${I('pin',15)}<span>${focus?'注目中の条件 '+(p.clues.indexOf(focus)+1)+'　'+E(focus.text):'注目する手がかりを選べます'}</span>${act('to-clues','条件を見る','','text-link')}</div>
+  <div class="focus-strip">${I('pin',15)}<span>${focus?'注目中の条件 '+(p.clues.indexOf(focus)+1)+'　'+E(focus.text):'注目する手がかりを選べます'}</span>${act('to-clues','手がかりへ','aria-controls="clue-panel"','text-link')}</div>
   ${trial?`<div class="trial-banner">${I('branch',17)}<b>仮定中 · ${E(trial.name)}</b>${act('discard','仮定前に戻す','','btn small')}</div>`:''}
   ${u.fit?`<p class="overview-note">全体表示中 · タップして位置を確認${u.key?' ／ '+E(labelFor(p,u.key)):''}</p>`:!a.solved?`<div class="brushes" aria-label="入力方法">${opts.map(([k,v])=>act('brush',v,`data-value="${k}" aria-pressed="${u.brush===k}"`,u.brush===k?'tool chosen':'tool')).join('')}</div>`:''}
   ${route?routeBoard(p,a,u):matrixBoard(p,a,u)}
@@ -86,7 +86,7 @@ export function player(p,a,u){
   ${a.solved?`<div class="clear-msg">${I('check',20)}<b>クリアしました</b></div><div class="actions">${act('retry','この問題を復習する','data-pid="'+p.id+'"','btn primary')}${link('records','学習記録へ')}</div>`:`<div class="board-actions"><div class="actions">${act('undo',I('undo',16)+' 一手戻す',dis(!a.undo.length),'btn small')}${act('redo',I('redo',16)+' やり直す',dis(!a.redo.length),'btn small')}</div><div class="actions">${act('inspect-check','矛盾を点検','','btn small')}${act('grade','解答を判定','','btn primary')}</div></div>`}
   ${u.feedback?`<div role="status" class="feedback ${u.feedback.bad?'bad':''}">${E(u.feedback.text)}</div>`:''}</section>
   ${panel('branch','仮定・チェックポイント',`<p>仮定中に置いた印、候補、メモ、根拠は、仮定前にまとめて戻せます。</p><div class="actions">${trial?act('discard','「'+E(trial.name)+'」の前へ戻す',dis(a.solved)):act('begin',I('branch',16)+' 名前を付けて仮定',dis(a.solved))}${act('point',I('flag',16)+' ここを保存',dis(a.solved))}</div>${a.points.length?`<ul class="point-list">${a.points.map(c=>`<li><span>${E(c.name)}${c.frame.branch?'（仮定中）':''}</span>${act('restore','ここへ戻す',`data-id="${E(c.id)}" ${dis(a.solved)}`,'btn small')}</li>`).join('')}</ul>`:''}`,'branch')}
-  ${organize(p,a,u)}</div><aside class="play-aside"><section class="panel padded" id="clue-panel" tabindex="-1"><div class="mini-heading">${I('list',18)}<h2>手がかり</h2></div>${clueList(p,b,'focus')}</section>
+  ${organize(p,a,u)}</div><aside class="play-aside">
   ${panel('rules','遊び方・ルール',`<ul>${p.rules.map(r=>`<li>${E(r)}</li>`).join('')}</ul><p>${route?'白・黒を選んで空きマスをタップします。隣り合う白には自動で線が付きます。':'○か×を選び、行と列の交点をタップします。○は一行に一つ。×は候補から外す印です。'}</p>`,'book')}
   ${guidance(p,a,u)}
   ${panel('reflection','振り返り',`<p>この問題で、どこで手が止まりましたか。あとから変更できます。</p><div class="choose-skills">${p.skills.map(t=>act('self',E(t),`data-value="${E(t)}" aria-pressed="${a.stats.self.includes(t)}"`,a.stats.self.includes(t)?'filter on':'filter')).join('')}</div>${a.solved?'':act('restart','最初からもう一度','','text-link')}`,'note')}
